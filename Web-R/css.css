@@ -27,9 +27,7 @@ header img {
     height: 40px;
 }
 
-nav {
-    position: relative;
-}
+
 
 nav ul {
     list-style: none;
@@ -37,12 +35,9 @@ nav ul {
     margin: 0;
     display: flex;
     gap: 1rem;
-    align-items: center;
+    align-items: flex-start;
 }
-
-nav ul li {
-    position: relative;
-}
+  
 
 nav ul li a {
     text-decoration: none;
@@ -53,6 +48,11 @@ nav ul li a {
 
 nav ul .desplegable:hover .contenido-desplegable {
     display: block;
+}
+
+#logo {
+    max-width: 100%;
+    height: auto;
 }
 
 .contenido-desplegable {
@@ -166,7 +166,7 @@ section .newsletter button:hover {
     margin-left: 1rem;
 }
 #newsletter img {
-    max-width: 100px;
+    max-width: 100%;
     height: auto;
     margin-left: 1rem;
 }

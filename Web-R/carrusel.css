@@ -1,0 +1,17 @@
+.carrusel-container {
+    width: 45%;
+    margin: auto;
+    overflow: hidden;
+    }
+    .carrusel {
+    display: flex;
+    transition: transform 0.5s ease;
+    }
+    .slide {
+    min-width: 100%;
+    transition: 0.5s;
+    }
+    .slide img {
+    width: 40%;
+    height: auto;
+    }
