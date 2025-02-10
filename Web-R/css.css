@@ -1,20 +1,34 @@
+
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f8f8f8;
+    color: #333;
+}
+
 header {
-    padding: 10px 0;
-    text-align: center;
-    background-color: white;
-    color: black;
+    background-color: #fff;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 header h1 {
-    margin: 0;
-    font-size: 2em;
-    color: black;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+header img {
+    height: 40px;
 }
 
 nav {
     position: relative;
-    background-color: white;
-    color: black;
 }
 
 nav ul {
@@ -22,47 +36,160 @@ nav ul {
     padding: 0;
     margin: 0;
     display: flex;
-    justify-content: center;
-    background-color: white;
+    gap: 1rem;
+    align-items: center;
 }
 
 nav ul li {
-    padding: 10px 20px;
-}
-
-nav ul li a {
-    color: black;
-    text-decoration: none;
-}
-
-nav ul li.active a {
-    font-weight: bold;
-}
-
-nav .desplegable {
     position: relative;
 }
 
-nav .contenido-desplegable {
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    padding: 0.5rem;
+}
+
+nav ul .desplegable:hover .contenido-desplegable {
+    display: block;
+}
+
+.contenido-desplegable {
     display: none;
     position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: white;
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem;
+    z-index: 10;
 }
 
-nav .contenido-desplegable li {
-    padding: 10px 20px;
+.contenido-desplegable li {
+    padding: 0.5rem 0;
 }
 
-nav .contenido-desplegable li a {
-    color: black;
+main {
+    padding: 1rem;
+}
+
+section {
+    margin-bottom: 2rem;
+}
+
+section#inicio h1 {
+    font-size: 2rem;
+    text-align: center;
+}
+
+section#inicio img {
+    display: block;
+    margin: 1rem auto;
+    max-width: 100%;
+    height: auto;
+}
+
+section .tendencia {
+    text-align: center;
+}
+
+section .tendencia img {
+    max-width: 100%;
+    height: auto;
+}
+
+section .newsletter {
+    text-align: center;
+    padding: 2rem;
+    background-color: #f0f0f0;
+}
+
+section .newsletter input {
+    width: 250px;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+section .newsletter button {
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+section .newsletter button:hover {
+    background-color: #555;
+}
+#rebaja{
+    max-width: 100%;
+    height: auto;
+}
+.tarjeta {
+    background-color: #e6e5e5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+    width: calc(33.355% - 2rem);
+    vertical-align: top;
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+#newsletter {
+    background-color: #d6d4d4;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 1rem;
+    margin-bottom: 1rem; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#newsletter input {
+    width: 250px;
+    padding: 0.5rem;
+    margin-bottom: 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+#newsletter button {
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #000000;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 1rem;
+}
+#newsletter img {
+    max-width: 100px;
+    height: auto;
+    margin-left: 1rem;
+}
+footer {
+    background-color: #222;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+}
+
+footer a {
+    color: #fff;
     text-decoration: none;
 }
 
-nav .desplegable:hover .contenido-desplegable {
-    display: block;
+footer a:hover {
+    text-decoration: underline;
+}
+
+
+@media (max-width: 768px) {
+    nav ul li a {
+        display: block;
+        padding: 10px 0;
+    }
 }
