@@ -1,7 +1,7 @@
 
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Baloo2', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -27,23 +27,30 @@ header img {
     height: 40px;
 }
 
-
+nav {
+    flex-grow: 1;
+}
 
 nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
-    gap: 1rem;
-    align-items: flex-start;
+    justify-content: space-between;
+    align-items: center;
 }
-  
+
+nav ul li {
+    flex: 1;
+    text-align: center;
+}
 
 nav ul li a {
     text-decoration: none;
     color: #333;
     font-weight: 500;
-    padding: 0.5rem;
+    padding: 10%;
+    display: block;
 }
 
 nav ul .desplegable:hover .contenido-desplegable {
@@ -139,6 +146,28 @@ section .newsletter button:hover {
     margin-right: 1rem;
     margin-left: 1rem;
 }
+#coleccion{
+   position: relative;
+   width: 100%;
+   max-width: 600px;
+    
+}
+#coleccion img {
+    width: 100%;
+    height: auto;
+}
+#coleccion p{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+
+
+}
 #newsletter {
     background-color: #d6d4d4;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -170,16 +199,54 @@ section .newsletter button:hover {
     height: auto;
     margin-left: 1rem;
 }
-footer {
+
+.footer {
+    grid-area: grid;
     background-color: #222;
     color: #fff;
-    text-align: center;
     padding: 1rem;
 }
+.footer-content{
+    display: grid;
+    grid-template-areas: "p1 p2"
+                         "p1 p2"
+                         "p3 p3";
+    
+    column-gap: 6%;
+    grid-template-columns: 40% 40%;
+    grid-template-rows: 30% 30% 30%;
 
+}
+#politicas{
+    grid-area: p1;
+}
+
+#redes{
+    grid-area: p2;
+}
+#licencia{
+    grid-area: p3;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+
+
+}
+#lincencia img{
+    grid-column: 1;
+    grid-row: 3;
+
+   
+} 
+#licencia p{
+    grid-column: 2;
+    grid-row: 3;
+    align-items: flex-end;
+}
 footer a {
     color: #fff;
     text-decoration: none;
+    text-align: center;
 }
 
 footer a:hover {
