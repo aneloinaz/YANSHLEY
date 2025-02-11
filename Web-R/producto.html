@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css.css">
     <script>
         document.getElementById("desplegable").add
+        productosapi();
     </script>
 </head>
 <body>
@@ -33,77 +34,19 @@
         </nav>
     </header>
 <main>
-    <section>
-        <form action="/search" method="get">
-            <input type="text" name="query" placeholder="Buscar">
-            <button type="submit">
-            <img src="#" alt="Buscar logo">
-           
-        </button>
-        </form>
-    </section>
+    <script> 
+    async function productosapi() {
+        
+   
+        const respuesta=  await fetch('https://fakestoreapi.com/products');
+        const datos=await respuesta.json();
+        console.log(datos);
+            
+        }
+        
+    </script>
 
-    <section class="producto">
-        <div>
-            <a href="producto1.html">
-            <img src="#" alt="producto1">
-            </a>
-            <h1>Producto</h1>
-            <p>Descripción</p>
-            <p>Precio</p>
-        </div>
-        <div>
-            <img src="#" alt="producto2">
-            <h1>Producto</h1>
-            <p>Descripción</p>
-            <p>Precio</p>
-        </div>
-
-        <div>
-            <img src="#" alt="producto3">
-            <h1>Producto</h1>
-            <p>Descripción</p>
-            <p>Precio</p>
-        </div>
-        <div>
-            <img src="#" alt="producto4">
-            <h1>Producto</h1>
-            <p>Descripción</p>
-            <p>Precio</p>
-        </div>
-    </section>
-
-    <section class="producto">
-        <div>
-            <img src="#" alt="producto5">
-            <h1>Producto</h1>
-            <p>Descripción</p>
-            <p>Precio</p>
-        </div>
-        <div>
-            <img src="#" alt="producto6">
-            <h1>Producto</h1>
-            <p>Descripción</p>
-            <p>Precio</p>
-        </div>
-
-        <div>
-            <img src="#" alt="producto7">
-            <h1>Producto</h1>
-            <p>Descripción</p>
-            <p>Precio</p>
-        </div>
-        <div>
-            <img src="#" alt="producto8">
-            <h1>Producto</h1>
-            <p>Descripción</p>
-            <p>Precio</p>
-        </div>
-        <button onclick="loadMoreImages()">
-            Cargar más
-        </button>
-    </section>
-</main>
+    
 
 <footer class="footer">
     <div class="footer-content">
