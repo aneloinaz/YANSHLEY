@@ -8,32 +8,37 @@ public class Producto {
     private String descripcion;
     private double precio;
     private int stock;
-    private Date fecha_cracion;
+    private Date fecha_creacion;
     private String imagen;
     private int id_categoria;
 
 //    consultar
-    public Producto(String nombre, int id_producto, String descripcion, double precio, int stock, Date fecha_cracion, String imagen, int id_categoria) {
+    public Producto(String nombre, int id_producto, String descripcion, double precio, int stock, Date fecha_creacion, String imagen, int id_categoria) {
         this.nombre = nombre;
         this.id_producto = id_producto;
         this.descripcion = descripcion;
         this.precio = precio;
         this.stock = stock;
-        this.fecha_cracion = fecha_cracion;
+        this.fecha_creacion = fecha_creacion;
         this.imagen = imagen;
         this.id_categoria = id_categoria;
     }
 // insertar
-    public Producto(String nombre, String descripcion, double precio, int stock, Date fecha_cracion, String imagen, int id_categoria) {
+    public Producto(String nombre, String descripcion, double precio, int stock, Date fecha_creacion, String imagen, int id_categoria) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.stock = stock;
-        this.fecha_cracion = fecha_cracion;
+        this.fecha_creacion = fecha_creacion;
         this.imagen = imagen;
         this.id_categoria = id_categoria;
     }
-//setters y getters
+
+    public Producto() {
+
+    }
+
+    //setters y getters
     public String getNombre() {
         return nombre;
     }
@@ -71,12 +76,12 @@ public class Producto {
         this.stock = stock;
     }
 
-    public Date getFecha_cracion() {
-        return fecha_cracion;
+    public Date getFecha_creacion() {
+        return fecha_creacion;
     }
 
-    public void setFecha_cracion(Date fecha_cracion) {
-        this.fecha_cracion = fecha_cracion;
+    public void setFecha_creacion(Date fecha_creacion) {
+        this.fecha_creacion = fecha_creacion;
     }
 
     public String getImagen() {
@@ -95,4 +100,17 @@ public class Producto {
         this.id_categoria = id_categoria;
     }
 
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "nombre='" + nombre + '\'' +
+                ", id_producto=" + id_producto +
+                ", descripcion='" + descripcion + '\'' +
+                ", precio=" + precio +
+                ", stock=" + stock +
+                ", fecha_creacion=" + fecha_creacion +
+                ", imagen='" + imagen + '\'' +
+                ", id_categoria=" + id_categoria +
+                '}';
+    }
 }
