@@ -208,40 +208,34 @@ section .newsletter button:hover {
 }
 .footer-content{
     display: grid;
-    grid-template-areas: "p1 p2"
-                         "p1 p2"
-                         "p3 p3";
+    grid-template-areas: "politicas redes"
+                         "politicas redes"
+                         "libre licencia";
     
     column-gap: 6%;
     grid-template-columns: 40% 40%;
-    grid-template-rows: 30% 30% 30%;
+    /*grid-template-rows: 30% 30% 30%;*/
 
 }
 #politicas{
-    grid-area: p1;
+    grid-area: politicas;
 }
 
 #redes{
-    grid-area: p2;
+    grid-area: redes;
 }
 #licencia{
-    grid-area: p3;
-    display: flex;
-    align-items: center;
-    padding: 20px;
-
-
+    grid-area: licencia;
+    display:flex;
+    text-align: right;
+    justify-content: space-between;
 }
 #lincencia img{
-    grid-column: 1;
-    grid-row: 3;
-
-   
+   align-items: center;
 } 
 #licencia p{
-    grid-column: 2;
-    grid-row: 3;
-    align-items: flex-end;
+    align-items: right;
+   
 }
 footer a {
     color: #fff;
