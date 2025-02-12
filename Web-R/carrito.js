@@ -1,33 +1,14 @@
 // Datos de productos (simulados aquí, pero en la práctica se obtendrían de productos.json)
-const productos = [
-    {
-        "id_producto": 1,
-        "nombre": "Camiseta Roja",
-        "descripcion": "Camiseta de algodón roja, talla M",
-        "precio": 19.99,
-        "stock": 100,
-        "fecha_creacion": "2025-02-10T12:00:00Z",
-        "id_categoria": 1
-    },
-    {
-        "id_producto": 2,
-        "nombre": "Pantalón Jeans",
-        "descripcion": "Pantalón de mezclilla, color azul, talla L",
-        "precio": 39.99,
-        "stock": 50,
-        "fecha_creacion": "2025-02-09T14:30:00Z",
-        "id_categoria": 2
-    },
-    {
-        "id_producto": 3,
-        "nombre": "Zapatos Deportivos",
-        "descripcion": "Zapatos deportivos para correr, talla 42",
-        "precio": 59.99,
-        "stock": 75,
-        "fecha_creacion": "2025-02-08T10:45:00Z",
-        "id_categoria": 3
-    }
-];
+const productos = {
+    id_producto: id_producto,
+    nombre: nombre,
+    descripcion: descripcion,
+    precio: precio,
+    stock: stock,
+    cantidad: 1, // Por defecto, añadir 1 unidad del producto
+    imagen: imagen
+
+};
 
 // Carrito de compras
 let carrito = [];
