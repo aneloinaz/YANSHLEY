@@ -1,90 +1,53 @@
-let carrito = []; // Arreglo para almacenar los productos en el carrito
-
-async function productosapi() {
-    try {
-        // Obtener los productos de la API
-        const respuesta = await fetch('https://fakestoreapi.com/products');
-        const datos = await respuesta.json();
-
-        // Seleccionar el contenedor en el HTML donde se mostrarán los productos
-        const contenedorProductos = document.getElementById('productos-lista');
-        
-        // Limpiar el contenedor antes de agregar nuevos productos
-        contenedorProductos.innerHTML = '';
-
-        // Iterar sobre los productos y crear elementos HTML para cada uno
-        datos.forEach(producto => {
-            const divProducto = document.createElement('div');
-            divProducto.classList.add('producto');
-
-            // Crear contenido dentro del contenedor del producto
-            divProducto.innerHTML = `
+// Función para cargar productos desde la API
+function cargarProductos() {
+    fetch('https://fakestoreapi.com/products')  // Cambia la URL por la de tu API
+        .then(response => response.json())
+        .then(productos => {
+            productos.forEach(producto => {
+                const productoElement = document.createElement('div');
+                productoElement.classList.add('producto');
+                productoElement.innerHTML = `
                 <h3>${producto.title}</h3>
                 <img src="${producto.image}" alt="${producto.title}" width="100">
                 <p>${producto.description}</p>
                 <p><strong>Precio: $${producto.price}</strong></p>
-                <button onclick="agregarAlCarrito(${producto.id}, '${producto.title}', ${producto.price})">Agregar al carrito</button>
-            `;
-
-            // Agregar el div del producto al contenedor principal
-            contenedorProductos.appendChild(divProducto);
-        });
-    } catch (error) {
-        console.error("Hubo un error al obtener los productos:", error);
-    }
+                <button onclick='agregarAlCarrito(${producto.id}, "${producto.title}", "${producto.description}",${producto.price}, ${producto.stock}, "${producto.image}")'>Añadir al carrito</button>
+                `;
+                document.getElementById('productos-lista').appendChild(productoElement);
+            });
+        })
+        .catch(error => console.error('Error al cargar los productos:', error));
 }
+
+// Llamar la función para cargar los productos al cargar la página
+document.addEventListener('DOMContentLoaded', cargarProductos);
 
 // Función para agregar productos al carrito
-function agregarAlCarrito(id, nombre, precio) {
+function agregarAlCarrito(id_producto, title, description, price, stock, image) {
+    const producto = {
+        id_producto:id_producto,
+        title:title,
+        image:image,
+        description:description,
+        price:price,
+        stock:stock,
+        cantidad: 1,  // Asumimos que el usuario agrega una unidad
+        
+    };
+
+    // Obtener el carrito del localStorage, si no existe inicializa como un array vacío
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
     // Verificar si el producto ya está en el carrito
-    const productoExistente = carrito.find(producto => producto.id === id);
-
+    const productoExistente = carrito.find(item => item.id_producto === id_producto);
     if (productoExistente) {
-        // Si el producto ya está en el carrito, incrementar la cantidad
-        productoExistente.cantidad++;
+        productoExistente.cantidad += 1;  // Aumentar la cantidad
     } else {
-        // Si no está, agregar el producto al carrito con cantidad 1
-       
-        carrito.push({
-            id,
-            nombre,
-            precio,
-            cantidad: 1
-        });
-        localStorage.setItem("carrito", JSON.stringify(carrito));
-
+        carrito.push(producto);
     }
 
-    // Mostrar el carrito actualizado
-    mostrarCarrito();
+    // Guardar el carrito actualizado en localStorage
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    console.log(producto);
+    alert('Producto añadido al carrito');
 }
-
-// Función para mostrar el carrito
-function mostrarCarrito() {
-    const contenedorCarrito = document.getElementById('carrito');
-    contenedorCarrito.innerHTML = ''; // Limpiar el carrito antes de mostrarlo
-
-    if (carrito.length === 0) {
-        contenedorCarrito.innerHTML = '<p>El carrito está vacío.</p>';
-        return;
-    }
-
-    // Crear un listado con los productos del carrito
-    carrito.forEach(producto => {
-        const divProducto = document.createElement('div');
-        divProducto.classList.add('producto-carrito');
-        divProducto.innerHTML = `
-            <p>${producto.nombre} x ${producto.cantidad} - $${producto.precio * producto.cantidad}</p>
-        `;
-        contenedorCarrito.appendChild(divProducto);
-    });
-
-    // Mostrar el total del carrito
-    const total = carrito.reduce((total, producto) => total + (producto.precio * producto.cantidad), 0);
-    const totalCarrito = document.createElement('div');
-    totalCarrito.innerHTML = `<p><strong>Total: $${total}</strong></p>`;
-    contenedorCarrito.appendChild(totalCarrito);
-}
-
-// Llamar a la función para mostrar los productos cuando se cargue la página
-productosapi();

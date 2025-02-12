@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css.css">
-    <script src="productos.js"></script>
 </head>
 
 <body>
@@ -29,18 +28,23 @@
                         <li><a href="chaquetas.html"></a>CHAQUETAS</li>
                     </ul>
                 </div>
-                <li><a href="cesta.html">Carrito</a></li>
+                <li><a href="cesta1.html">Carrito</a></li>
                 <li><a href="PerfilUsuario.html">Usuario</a></li>
             </ul>
         </nav>
     </header>
    
-    <h2>Carrito de Compras</h2>
-    <div id="carrito">
-        <!-- Los productos del carrito se mostrarán aquí -->
-         
+    <h1>Tu Carrito</h1>
+    <div id="carritoContenedor">
+        <!-- Aquí se mostrarán los productos del carrito -->
     </div>
-<!--<script src="carrito.js"></script>-->
+
+    <h3>Total: <span id="totalCarrito">$0</span></h3>
+    
+    <button onclick="finalizarCompra()">Finalizar compra</button>
+    <button onclick="vaciarCarrito()">Vaciar carrito</button>
+
+    <script src="cesta.js"></script> <!-- El archivo JavaScript -->
 
     <footer class="footer">
         <div class="footer-content">
