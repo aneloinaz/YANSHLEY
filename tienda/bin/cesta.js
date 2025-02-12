@@ -18,7 +18,7 @@ function mostrarCarrito() {
         `;
         carritoContenedor.appendChild(productoElement);
         
-        total += producto.precio * producto.cantidad;
+        total += producto.price * producto.cantidad;
     });
 
     // Mostrar el total

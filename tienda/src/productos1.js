@@ -11,7 +11,7 @@ function cargarProductos() {
                 <img src="${producto.image}" alt="${producto.title}" width="100">
                 <p>${producto.description}</p>
                 <p><strong>Precio: $${producto.price}</strong></p>
-                <button onclick="agregarAlCarrito(${producto.id}, '${producto.title}', ${producto.price}, ${producto.stock}, '${producto.imagen}')">Añadir al carrito</button>
+                <button onclick='agregarAlCarrito(${producto.id}, "${producto.title}", "${producto.description}",${producto.price}, ${producto.stock}, "${producto.image}")'>Añadir al carrito</button>
                 `;
                 document.getElementById('productos-lista').appendChild(productoElement);
             });
@@ -23,14 +23,14 @@ function cargarProductos() {
 document.addEventListener('DOMContentLoaded', cargarProductos);
 
 // Función para agregar productos al carrito
-function agregarAlCarrito(id_producto, title, descrition, price, stock, image) {
+function agregarAlCarrito(id_producto, title, description, price, stock, image) {
     const producto = {
-        id_producto,
-        tilte,
-        image,
-        description,
-        price,
-        stock,
+        id_producto:id_producto,
+        title:title,
+        image:image,
+        description:description,
+        price:price,
+        stock:stock,
         cantidad: 1,  // Asumimos que el usuario agrega una unidad
         
     };
@@ -43,18 +43,11 @@ function agregarAlCarrito(id_producto, title, descrition, price, stock, image) {
     if (productoExistente) {
         productoExistente.cantidad += 1;  // Aumentar la cantidad
     } else {
-        carrito.push({
-            id_producto,
-            tilte,
-            image,
-            description,
-            price,
-            stock,
-            cantidad: 1});
+        carrito.push(producto);
     }
 
     // Guardar el carrito actualizado en localStorage
     localStorage.setItem('carrito', JSON.stringify(carrito));
-
+    console.log(producto);
     alert('Producto añadido al carrito');
 }

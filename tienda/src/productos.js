@@ -96,8 +96,34 @@ function mostrarCarrito() {
     totalCarrito.innerHTML = `<p><strong>Total: $${total}</strong></p>`;
     contenedorCarrito.appendChild(totalCarrito);
 }
+// Función para eliminar un producto del carrito
+function eliminarProducto(id_producto) {
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    carrito = carrito.filter(producto => producto.id_producto !== id_producto); // Eliminar producto
+    localStorage.setItem('carrito', JSON.stringify(carrito)); // Guardar el carrito actualizado
+    mostrarCarrito();  // Actualizar la vista del carrito
+}
+
+// Función para vaciar el carrito
+function vaciarCarrito() {
+    localStorage.removeItem('carrito');  // Eliminar carrito del localStorage
+    mostrarCarrito();  // Actualizar la vista del carrito
+}
+
+// Función para finalizar la compra (puedes agregar más lógica aquí)
+function finalizarCompra() {
+    alert("Compra finalizada. ¡Gracias por tu compra!");
+    localStorage.removeItem('carrito');  // Limpiar el carrito después de la compra
+    mostrarCarrito();  // Actualizar la vista del carrito
+}
+
+// Llamar a la función para mostrar el carrito al cargar la página
+document.addEventListener('DOMContentLoaded', mostrarCarrito);
 
 
 // Llamar a la función para mostrar los productos cuando se cargue la página
 productosapi();
 mostrarCarrito(); // Mostrar el carrito al cargar la página*/
+eliminarProducto();
+vaciarCarrito();
+finalizarCompra();
