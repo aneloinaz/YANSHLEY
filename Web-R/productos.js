@@ -84,19 +84,35 @@ function filterProducts(category) {
 }
 
 // Renderizar todos los productos por defecto al cargar la página
+let productosGlobal = [];
+
 document.addEventListener('DOMContentLoaded', () => {
     fetch('https://fakestoreapi.com/products')  // Cambia la URL por la de tu API
         .then(response => response.json())
-        .then(productos => renderProducts(productos))
+        .then(productos => {
+            productosGlobal = productos;
+            renderProducts(productos);
+        })
         .catch(error => console.error('Error al cargar los productos:', error));
 
     // Agregar event listeners para los filtros
     document.getElementById('filter-category').addEventListener('change', (event) => {
         const category = event.target.value;
         if (category === 'all') {
-            renderProducts(productos);
+            renderProducts(productosGlobal);
         } else {
             filterProducts(category);
         }
     });
+
+    // Render all products by default
+    renderProducts(productosGlobal);
+        const category = event.target.value;
+        if (category === 'all') {
+            renderProducts(productosGlobal);
+        } else {
+            filterProducts(category);
+        }
+    // Render all products by default
+    renderProducts(productosGlobal);
 });
