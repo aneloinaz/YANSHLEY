@@ -2,8 +2,12 @@ package Tests;
 
 import Entidades.Producto;
 import Gestion.Gestion_Productos;
+import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class GestionProductosTest {
@@ -41,5 +45,20 @@ public class GestionProductosTest {
             System.err.println("Lista Vacia");
         }
     }
-
+    //     Agregar Productos
+    @Test
+    public void AgregarProductos_Test()throws Exception{
+        Gestion_Productos gestion = new Gestion_Productos();
+        Producto producto = new Producto("Nombre falso","Descripcion falsa",99.99,22,"http://HolaMundo.com",4);
+        Assert.assertTrue(gestion.AgregarProducto(producto));
+    }
+    //  Modificar Productos
+    @Test
+    public void ModificarProducto()throws Exception{
+        Map<String, Object> producto = new HashMap<>();
+        producto.put("nombre","Camisa Moderna");
+        producto.put("precio",19.99);
+        Gestion_Productos gestion = new Gestion_Productos();
+        Assert.assertTrue(gestion.ModificarProducto(producto,12));
+    }
 }

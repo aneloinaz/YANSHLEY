@@ -1,19 +1,17 @@
 package Entidades;
 
-import java.util.Date;
-
 public class Producto {
     private String nombre;
     private int id_producto;
     private String descripcion;
     private double precio;
     private int stock;
-    private Date fecha_creacion;
+    private java.sql.Date fecha_creacion;
     private String imagen;
     private int id_categoria;
 
 //    consultar
-    public Producto(String nombre, int id_producto, String descripcion, double precio, int stock, Date fecha_creacion, String imagen, int id_categoria) {
+    public Producto(String nombre, int id_producto, String descripcion, double precio, int stock, java.sql.Date fecha_creacion, String imagen, int id_categoria) {
         this.nombre = nombre;
         this.id_producto = id_producto;
         this.descripcion = descripcion;
@@ -24,12 +22,12 @@ public class Producto {
         this.id_categoria = id_categoria;
     }
 // insertar
-    public Producto(String nombre, String descripcion, double precio, int stock, Date fecha_creacion, String imagen, int id_categoria) {
+    public Producto(String nombre, String descripcion, double precio, int stock,String imagen, int id_categoria) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.stock = stock;
-        this.fecha_creacion = fecha_creacion;
+        this.fecha_creacion = new java.sql.Date(System.currentTimeMillis());
         this.imagen = imagen;
         this.id_categoria = id_categoria;
     }
@@ -76,11 +74,11 @@ public class Producto {
         this.stock = stock;
     }
 
-    public Date getFecha_creacion() {
+    public java.sql.Date getFecha_creacion() {
         return fecha_creacion;
     }
 
-    public void setFecha_creacion(Date fecha_creacion) {
+    public void setFecha_creacion(java.sql.Date fecha_creacion) {
         this.fecha_creacion = fecha_creacion;
     }
 

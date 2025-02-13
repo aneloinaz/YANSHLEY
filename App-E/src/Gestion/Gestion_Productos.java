@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Gestion_Productos {
     static ConexionBD conn = new ConexionBD();
@@ -70,16 +71,62 @@ public class Gestion_Productos {
         return Lista_productos;
     }
 
-
-
-
 // AGREGAR PRODUCTOS
-public Boolean AgregarProducto()throws Exception{
-
-
-
+    public Boolean AgregarProducto(Producto producto)throws Exception{
+    try( Connection connect = new ConexionBD().conectar();){
+        String query = "INSERT INTO producto (nombre,descripcion,precio,stock,fecha_creacion,imagen,ID_categoria) VALUE (?,?,?,?,?,?,?)";
+        CallableStatement cs = connect.prepareCall(query);
+        cs.setString(1,producto.getNombre());
+        cs.setString(2,producto.getDescripcion());
+        cs.setDouble(3,producto.getPrecio());
+        cs.setInt(4,producto.getStock());
+        cs.setDate(5,producto.getFecha_creacion());
+        cs.setString(6,producto.getImagen());
+        cs.setInt(7,producto.getId_categoria());
+        int response = cs.executeUpdate();
+        return response > 0;
+    }catch(Exception e){
+        System.err.println("Error en la insercion: "+e);
+    }
     return false;
 }
+
+//  MODIFICAR PRODUCTO
+    public Boolean ModificarProducto(Map<String, Object> producto, int ID)throws Exception{
+        try( Connection connect = conn.conectar() ){
+            List<String> Rows = new ArrayList<>();
+
+            StringBuilder query = new StringBuilder("UPDATE producto SET ");
+
+            for(Map.Entry<String,Object> info : producto.entrySet()){
+                Rows.add(info.getKey().concat("=?"));
+            }
+            query.append(String.join(",",Rows));
+            query.append(" WHERE ID_producto=?");
+            CallableStatement cs = connect.prepareCall(String.valueOf(query));
+            int index = 1;
+            for(Map.Entry<String, Object> info : producto.entrySet()){
+                Object value = info.getValue();
+
+                if(value instanceof String){
+                    cs.setString(index, (String) value);
+                }else if(value instanceof Integer){
+                    cs.setInt(index,(Integer) value);
+                }else if(value instanceof Double){
+                    cs.setDouble(index,(Double) value);
+                }
+                index++;
+            }
+            cs.setInt(index,ID);
+
+            int response = cs.executeUpdate();
+            return response > 0;
+        }catch(Exception e) {
+            System.err.println("Exrror en la Conexión: "+e);
+        }
+        return false;
+
+    }
 
 
 
