@@ -26,7 +26,7 @@ function mostrarProductos() {
             <p>${producto.descripcion}</p>
             <p>Precio: $${producto.precio}</p>
             <p>Stock: ${producto.stock}</p>
-            <button onclick="agregarAlCarrito(${producto.id_producto})">Agregar al carrito</button>
+            <button  onclick="agregarAlCarrito(${producto.id_producto})">Agregar al carrito</button>
         `;
         listaProductos.appendChild(divProducto);
     });

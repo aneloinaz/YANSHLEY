@@ -51,3 +51,52 @@ function agregarAlCarrito(id_producto, title, description, price, stock, image) 
     console.log(producto);
     alert('Producto añadido al carrito');
 }
+
+
+// Función para renderizar productos en la página
+function renderProducts(productos) {
+    const productosLista = document.getElementById('productos-lista');
+    productosLista.innerHTML = ''; // Limpiar la lista de productos
+
+    productos.forEach(producto => {
+        const productoElement = document.createElement('div');
+        productoElement.classList.add('producto');
+        productoElement.innerHTML = `
+            <h3>${producto.title}</h3>
+            <img src="${producto.image}" alt="${producto.title}" width="100">
+            <p>${producto.description}</p>
+            <p><strong>Precio: $${producto.price}</strong></p>
+            <button onclick='agregarAlCarrito(${producto.id}, "${producto.title}", "${producto.description}",${producto.price}, ${producto.stock}, "${producto.image}")'>Añadir al carrito</button>
+        `;
+        productosLista.appendChild(productoElement);
+    });
+}
+
+// Función para filtrar productos por categoría
+function filterProducts(category) {
+    fetch('https://fakestoreapi.com/products')  // Cambia la URL por la de tu API
+        .then(response => response.json())
+        .then(productos => {
+            const filteredProducts = productos.filter(producto => producto.category === category);
+            renderProducts(filteredProducts);
+        })
+        .catch(error => console.error('Error al filtrar los productos:', error));
+}
+
+// Renderizar todos los productos por defecto al cargar la página
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('https://fakestoreapi.com/products')  // Cambia la URL por la de tu API
+        .then(response => response.json())
+        .then(productos => renderProducts(productos))
+        .catch(error => console.error('Error al cargar los productos:', error));
+
+    // Agregar event listeners para los filtros
+    document.getElementById('filter-category').addEventListener('change', (event) => {
+        const category = event.target.value;
+        if (category === 'all') {
+            renderProducts(productos);
+        } else {
+            filterProducts(category);
+        }
+    });
+});
