@@ -16,6 +16,7 @@ public class GestionProductosTest {
     public void ConsultaProductos_Busqueda()throws Exception{
         Gestion_Productos lista = new Gestion_Productos();
         List<Producto> lista_esperada = lista.TraerProductos("camisa");
+
         if(!lista_esperada.isEmpty()){
             System.out.println(  lista_esperada.getFirst().toString());
         }else{
@@ -60,5 +61,11 @@ public class GestionProductosTest {
         producto.put("precio",19.99);
         Gestion_Productos gestion = new Gestion_Productos();
         Assert.assertTrue(gestion.ModificarProducto(producto,12));
+    }
+//    Eliminar Producto
+    @Test
+    public void EliminarProducto()throws Exception{
+        Gestion_Productos gestion = new Gestion_Productos();
+        Assert.assertTrue(gestion.EliminarProducto(25));
     }
 }

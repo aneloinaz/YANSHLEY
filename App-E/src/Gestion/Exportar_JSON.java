@@ -14,7 +14,13 @@ public class Exportar_JSON {
         List<Producto>Listar_Productos  = gestionProductos.TraerProductos();
 
         File file = new File(PRODUCTOS_C_JSON);
-        StringBuilder ParseJson = FormatJSON(Listar_Productos);
+
+        StringBuilder ParseJson = new StringBuilder();
+        if(Listar_Productos.isEmpty()){
+            System.err.println("No se encuentran coincidencias");
+        }else {
+            ParseJson =  FormatJSON(Listar_Productos);
+        }
 
         try( FileWriter fileWriter = new FileWriter(PATH+PRODUCTOS_C_JSON);){
 

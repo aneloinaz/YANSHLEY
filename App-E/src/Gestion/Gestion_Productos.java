@@ -128,7 +128,20 @@ public class Gestion_Productos {
 
     }
 
-
+// Eliminar producto
+    public Boolean EliminarProducto(int ID)throws Exception{
+        try( Connection connect = conn.conectar() ){
+            String query = "DELETE FROM producto WHERE ID_producto = ?";
+            CallableStatement cs = connect.prepareCall(query);
+            cs.setInt(1,ID);
+            int response = cs.executeUpdate();
+            System.out.println("Producto eliminado");
+            return response > 0;
+        }catch(Exception e){
+            System.err.println("Error al Eliminar el producto: "+e);
+        }
+        return false;
+    }
 
 
 
