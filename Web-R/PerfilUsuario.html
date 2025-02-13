@@ -7,7 +7,7 @@
     <title>PERFIL DE USUARIO</title>
     <link rel="stylesheet" href="css.css">
 </head>
-<style>
+<!--<style>
     /* Reset de márgenes y padding */
 * {
     margin: 0;
@@ -87,7 +87,7 @@ main p {
     background-color: #d32f2f;
 }
  
-</style>
+</style>-->
 <header>
     <h1>UsurbilTex</h1>
     <img src="../Web-R/Icons/textile_svgrepo.com.png" alt="logo">
@@ -95,14 +95,12 @@ main p {
         <ul>
             <li class="active"><a href="index.html">Inicio</a></li>
             <div class="desplegable">
-                <li class=""><a href="producto.html">Productos</a></li>
+                <li><a href="productos.html">Productos</a></li>
                 <ul class="contenido-desplegable">
-                    <li><a href="#" onclick="filterProducts('zapatos')">ZAPATOS</a></li>
-                    <li><a href="#" onclick="filterProducts('pantalones')">PANTALONES</a></li>
-                    <li><a href="#" onclick="filterProducts('camisetas')">CAMISETAS</a></li>
-                    <li><a href="#" onclick="filterProducts('sudaderas')">SUDADERAS</a></li>
-                    <li><a href="#" onclick="filterProducts('camisas')">CAMISAS</a></li>
-                    <li><a href="#" onclick="filterProducts('chaquetas')">CHAQUETAS</a></li>
+                    <li><a href="#" class="categoria" data-category="men's clothing">ZAPATOS</a></li>
+                    <li><a href="#" class="categoria" data-category="women's clothing">PANTALONES</a></li>
+                    <li><a href="#" class="categoria" data-category="jewelery">CAMISETAS</a></li>
+                    <li><a href="#" class="categoria" data-category="men's clothing">SUDADERAS</a></li>
                 </ul>
             </div>
             <li><a href="cesta.html">Carrito</a></li>
