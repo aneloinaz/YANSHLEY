@@ -153,7 +153,7 @@ section .newsletter button:hover {
     
 }
 #coleccion img {
-    width: 100%;
+    max-width: 150%;
     height: auto;
 }
 #coleccion p{
