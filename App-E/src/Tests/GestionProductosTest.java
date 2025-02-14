@@ -22,7 +22,6 @@ public class GestionProductosTest {
         }else{
             System.err.println("Lista Vacia");
         }
-
     }
     //    Test de filtrado por categoria
     @Test
