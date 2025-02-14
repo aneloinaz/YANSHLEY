@@ -4,24 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UsurbilTex</title>
+    <title>Document</title>
     <link rel="stylesheet" href="css.css">
 </head>
 
 <body>
     <header>
         <h1>UsurbilTex</h1>
-        <img src="../Web-R/Icons/textile_svgrepo.com.png" alt="logo">
+        <img src="../Icons/textile_svgrepo.com.png" alt="logo">
         <nav>
+            <!--  <input type="checkbox" id="menu">
+            <label for="menu"><img src="../Icons/search-alt-2_svgrepo.com.png" alt=""></label>-->
             <ul>
                 <li class="active"><a href="index.html">Inicio</a></li>
                 <div class="desplegable">
-                    <li><a href="productos.html">Productos</a></li>
+                    <li class=""><a href="producto.html">Productos</a></li>
                     <ul class="contenido-desplegable">
-                        <li><a href="#" class="categoria" data-category="men's clothing">ZAPATOS</a></li>
-                        <li><a href="#" class="categoria" data-category="women's clothing">PANTALONES</a></li>
-                        <li><a href="#" class="categoria" data-category="jewelery">CAMISETAS</a></li>
-                        <li><a href="#" class="categoria" data-category="men's clothing">SUDADERAS</a></li>
+                        <li><a href="zapatos.html">ZAPATOS</a></li>
+                        <li><a href="pantalones.html">PANTALONES</a></li>
+                        <li><a href="camisetas.html">CAMISETAS</a></li>
+                        <li><a href="sudaderas.html">SUDADERAS</a></li>
+                        <li><a href="camisas.html"></a>CAMISAS</li>
+                        <li><a href="chaquetas.html"></a>CHAQUETAS</li>
                     </ul>
                 </div>
                 <li><a href="cesta.html">Carrito</a></li>
@@ -29,17 +33,15 @@
             </ul>
         </nav>
     </header>
-    <h1>Tu Carrito</h1>
-    <div id="carritoContenedor">
-        <!-- Aquí se mostrarán los productos del carrito -->
+   
+    <h2>Carrito de Compras</h2>
+    <div id="carrito">
+        <!-- Los productos del carrito se mostrarán aquí -->
     </div>
 
-    <h3>Total: <span id="totalCarrito">$0</span></h3>
-    
-    <button id="finalizar" onclick="finalizarCompra()">Finalizar compra</button>
-    <button  id="vaciar"  onclick="vaciarCarrito()">Vaciar carrito</button>
-
-    <script src="cesta.js"></script> <!-- El archivo JavaScript -->
+    <script src="productos.js"></script>
+    <button onclick="finalizarCompra()">Finalizar compra</button>
+    <button onclick="vaciarCarrito()">Vaciar carrito</button>
 
     <footer class="footer">
         <div class="footer-content">

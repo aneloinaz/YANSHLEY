@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Productos</title>
+    <link rel="stylesheet" href="css.css">
+</head>
+<body>
+    <header>
+        <h1>UsurbilTex</h1>
+        <img src="../Icons/textile_svgrepo.com.png" alt="logo">
+        <nav>
+            <ul>
+                <li class="active"><a href="index.html">Inicio</a></li>
+                <div class="desplegable">
+                    <li class=""><a href="producto.html">Productos</a></li>
+                    <ul class="contenido-desplegable">
+                        <li><a href="#" onclick="filterProducts('zapatos')">ZAPATOS</a></li>
+                        <li><a href="#" onclick="filterProducts('pantalones')">PANTALONES</a></li>
+                        <li><a href="#" onclick="filterProducts('camisetas')">CAMISETAS</a></li>
+                        <li><a href="#" onclick="filterProducts('sudaderas')">SUDADERAS</a></li>
+                        <li><a href="#" onclick="filterProducts('camisas')">CAMISAS</a></li>
+                        <li><a href="#" onclick="filterProducts('chaquetas')">CHAQUETAS</a></li>
+                    </ul>
+                </div>
+                <li><a href="cesta.html">Carrito</a></li>
+                <li><a href="PerfilUsuario.html">Usuario</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1>Productos Disponibles</h1>
+    <div id="productos-lista">
+        <!-- Los productos se mostrarán aquí -->
+    </div>
+    <script src="productos.js"></script>
+    <h2>Carrito de Compras</h2>
+    <div id="carrito">
+        <!-- Los productos del carrito se mostrarán aquí -->
+    </div>
+    
+        <footer class="footer">
+            <div class="footer-content">
+                <div id="politicas">
+                    <p>POLITICAS DE COOKIES</p>
+                    <p>POLITICAS DE PRIVACIDAD</p>
+                    <a href="mailto:usurbiltex@gmail.eus">CONTACTO: USURBILTEX </a>
+                </div>
+                <div id="redes">
+                    <h3>SIGUENOS EN REDES SOCIALES</h3>
+                    <a href="https://www.instagram.com"><img src="../Icons/instagram-round_svgrepo.com.png"
+                            alt="instagram"></a>
+                    <a href="https://www.facebook.com"><img src="../Icons/Vector.png" alt="facebook"></a>
+                </div>
+                <div id="licencia">
+                    <img src="../Icons/image 1.png" alt="imgfooter">
+                    <p>USURBIL TEX 2025 &COPY;</p>
+                </div> 
+            </div>
+        </footer>
+</body>
+</html>

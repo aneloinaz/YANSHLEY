@@ -248,13 +248,11 @@ footer a:hover {
 }
 .producto {
     border: 1px solid #ccc;
-    border-radius: 5px;
     padding: 10px;
     margin-bottom: 20px;
     display: inline-block;
     width: 200px;
     text-align: center;
- 
 }
 .producto img {
     max-width: 100%;
@@ -266,18 +264,9 @@ footer a:hover {
     margin: 10px 0;
     text-align: left;
 }
-
-#productos-lista {
-    padding: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    border-radius: 50px;
-}
 #carrito {
     margin-top: 20px;
 }
-
 
 
 @media (max-width: 768px) {
