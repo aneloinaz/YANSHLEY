@@ -26,6 +26,9 @@ function cargarTodosLosProductos() {
                         <img class="img-producto" src="${imgUrl}" alt="${product.nombre}" style="height:300px;margin-top:20px;" onclick="verProducto(${product.id})" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300?text=No+Image';">
                         <h2 style="height:55px; overflow:hidden;">${product.nombre}</h2>
                         <p><b>${product.precio}€</b></p>
+                         <button style="border: none; background-color: white;">
+                        <a onclick="agregarAlCarrito(${product.id}, '${product.nombre}', '${product.descripcion}', ${product.precio}, ${product.stock}, '${product.imagen}')">Añadir al carrito</a>
+                    </button>
                     </div>
                     <br>
                 `;
@@ -51,7 +54,7 @@ function verProducto(productId) {
             const product = json.find(item => item.id === productId);
             if (!product) {
                 console.error('Producto no encontrado');
-                return;
+                return;nu 
             }
 
             const container = document.getElementById('productos-lista');
@@ -96,6 +99,48 @@ function verCategoria(categoria) {
                         <img class="img-producto" src="${imgUrl}" alt="${product.nombre}" style="height:300px;margin-top:20px;" onclick="verProducto(${product.id})" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300?text=No+Image';">
                         <h2 style="height:55px; overflow:hidden;">${product.nombre}</h2>
                         <p><b>${product.precio}€</b></p>
+                         <button style="border: none; background-color: white;">
+                        <a onclick="agregarAlCarrito(${product.id}, '${product.nombre}', '${product.descripcion}', ${product.precio}, ${product.stock}, '${product.imagen}')">Añadir al carrito</a>
+                    </button>
+                    </div>
+                    <br>
+                `;
+                container.appendChild(div);
+            });
+        })
+        .catch(error => console.error('Error al cargar los productos:', error));
+}
+
+// Función para ver todos los productos de una categoría
+function verCategoria(categoria) {
+    fetch('http://localhost/productos.json')
+        .then(res => {
+            if (!res.ok) throw new Error('Error en la respuesta de la API');
+            return res.json();
+        })
+        .then(products => {
+            const container = document.getElementById('productos-lista');
+            container.innerHTML = '';
+
+            // Filtrar los productos según la categoría numérica
+            const productosFiltrados = products.filter(product => product.categoria === parseInt(categoria));
+
+            // Verificar si hay productos filtrados
+            if (productosFiltrados.length === 0) {
+                container.innerHTML = '<p>No se encontraron productos en esta categoría.</p>';
+            }
+
+            productosFiltrados.forEach(product => {
+                const imgUrl = product.imagen.startsWith('http') ? product.imagen : `http://localhost/${product.imagen}`;
+                const div = document.createElement('div');
+                div.innerHTML = `
+                    <div class="producto">
+                        <img class="img-producto" src="${imgUrl}" alt="${product.nombre}" style="height:300px;margin-top:20px;" onclick="verProducto(${product.id})" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300?text=No+Image';">
+                        <h2 style="height:55px; overflow:hidden;">${product.nombre}</h2>
+                        <p><b>${product.precio}€</b></p>
+                         <button style="border: none; background-color: white;">
+                        <a onclick="agregarAlCarrito(${product.id}, '${product.nombre}', '${product.descripcion}', ${product.precio}, ${product.stock}, '${product.imagen}')">Añadir al carrito</a>
+                    </button>
                     </div>
                     <br>
                 `;
@@ -107,6 +152,7 @@ function verCategoria(categoria) {
 
 // Función para filtrar productos por categoría
 function filterProducts(categoria) {
+    console.log('Filtrando por categoría:', categoria); // Verifica que el filtro recibe correctamente la categoría
     verCategoria(categoria);
 }
 
@@ -119,7 +165,23 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.categoria').forEach(element => {
         element.addEventListener('click', (event) => {
             event.preventDefault();  // Evita recargar la página
-            const categoria = event.target.getAttribute('data-categoria');
+            const categoria = event.target.getAttribute('categoria-datos');
+            console.log('Categoría seleccionada:', categoria); // Verifica si la categoría está correcta
+            filterProducts(categoria);
+        });
+    });
+});
+
+// Llamar la función para cargar todos los productos al cargar la página
+document.addEventListener('DOMContentLoaded', () => {
+    cargarTodosLosProductos();
+    document.getElementById('carrito')?.addEventListener('click', verCarrito);
+
+    // Agregar event listeners para filtrar productos por categoría
+    document.querySelectorAll('.categoria').forEach(element => {
+        element.addEventListener('click', (event) => {
+            event.preventDefault();  // Evita recargar la página
+            const categoria = event.target.getAttribute('categoria-datos');
             filterProducts(categoria);
         });
     });

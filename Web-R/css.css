@@ -1,5 +1,4 @@
-
-
+/* Estilos generales */
 body {
     font-family: 'Baloo2', sans-serif;
     margin: 0;
@@ -16,6 +15,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 header h1 {
@@ -29,6 +29,7 @@ header img {
 
 nav {
     flex-grow: 1;
+   
 }
 
 nav ul {
@@ -38,11 +39,14 @@ nav ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 nav ul li {
     flex: 1;
     text-align: center;
+    
+    
 }
 
 nav ul li a {
@@ -51,15 +55,32 @@ nav ul li a {
     font-weight: 500;
     padding: 10%;
     display: block;
+    
+}
+nav ul li a img {
+ display: none;
 }
 
 nav ul .desplegable:hover .contenido-desplegable {
     display: block;
 }
 
+
 #logo {
-    max-width: 100%;
-    height: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#logo img {
+    height: 50px;
+    width: auto;
+}
+
+#logo h1 {
+    font-size: 1.5rem;
+    margin: 0;
+    font-weight: 700;
 }
 
 .contenido-desplegable {
@@ -130,10 +151,12 @@ section .newsletter button {
 section .newsletter button:hover {
     background-color: #555;
 }
-#rebaja{
+
+#rebaja {
     max-width: 100%;
     height: auto;
 }
+
 .tarjeta {
     background-color: #e6e5e5;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -146,17 +169,19 @@ section .newsletter button:hover {
     margin-right: 1rem;
     margin-left: 1rem;
 }
-#coleccion{
-   position: relative;
-   width: 100%;
-   max-width: 600px;
-    
+
+#coleccion {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
 }
+
 #coleccion img {
     width: 100%;
     height: auto;
 }
-#coleccion p{
+
+#coleccion p {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -165,19 +190,19 @@ section .newsletter button:hover {
     font-size: 24px;
     font-weight: bold;
     text-align: center;
-
-
 }
+
 #newsletter {
     background-color: #d6d4d4;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     padding: 1rem;
-    margin-bottom: 1rem; 
+    margin-bottom: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 #newsletter input {
     width: 250px;
     padding: 0.5rem;
@@ -185,6 +210,7 @@ section .newsletter button:hover {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
 #newsletter button {
     padding: 0.5rem 1rem;
     border: none;
@@ -194,6 +220,7 @@ section .newsletter button:hover {
     border-radius: 5px;
     margin-left: 1rem;
 }
+
 #newsletter img {
     max-width: 100%;
     height: auto;
@@ -206,37 +233,39 @@ section .newsletter button:hover {
     color: #fff;
     padding: 1rem;
 }
-.footer-content{
+
+.footer-content {
     display: grid;
     grid-template-areas: "politicas redes"
-                         "politicas redes"
-                         "libre licencia";
-    
+        "politicas redes"
+        "libre licencia";
     column-gap: 6%;
     grid-template-columns: 40% 40%;
-    /*grid-template-rows: 30% 30% 30%;*/
-
 }
-#politicas{
+
+#politicas {
     grid-area: politicas;
 }
 
-#redes{
+#redes {
     grid-area: redes;
 }
-#licencia{
+
+#licencia {
     grid-area: licencia;
-    display:flex;
+    display: flex;
     text-align: right;
     justify-content: space-between;
 }
-#lincencia img{
-   align-items: center;
-} 
-#licencia p{
-    align-items: right;
-   
+
+#lincencia img {
+    align-items: center;
 }
+
+#licencia p {
+    align-items: right;
+}
+
 footer a {
     color: #fff;
     text-decoration: none;
@@ -246,6 +275,7 @@ footer a {
 footer a:hover {
     text-decoration: underline;
 }
+
 .producto {
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -254,12 +284,13 @@ footer a:hover {
     display: inline-block;
     width: 200px;
     text-align: center;
- 
 }
+
 .producto img {
     max-width: 100%;
     height: auto;
 }
+
 .producto-carrito {
     border: 1px solid #ddd;
     padding: 8px;
@@ -274,15 +305,122 @@ footer a:hover {
     justify-content: space-around;
     border-radius: 50px;
 }
+
 #carrito {
     margin-top: 20px;
 }
 
-
-
+/* Estilos responsivos */
 @media (max-width: 768px) {
-    nav ul li a {
-        display: block;
-        padding: 10px 0;
-    }
+    /* Estilo General del Nav */
+nav ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0.5rem 0;
+    margin: 0;
+    z-index: 100;
+    list-style: none;
 }
+
+/* Estilo de los Ítems del Nav */
+nav ul li {
+    flex: 1;
+    text-align: center;
+}
+nav ul li a span {
+    display: none;
+}
+
+
+nav ul li a {
+    display: block;
+    color: #333;
+    font-size: 0.8rem;
+    text-decoration: none;
+}
+
+/* Estilo de las Imágenes de Íconos */
+nav ul li a img {
+    display: block;
+    margin: 0 auto;
+    width: 24px;
+    height: 24px;
+}
+
+/* Hover para los Enlaces */
+nav ul li a:hover {
+    color: #000;
+}
+
+/* Estilo del Menú Desplegable */
+.contenido-desplegable {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem;
+    list-style: none;
+    text-align: left;
+}
+
+.desplegable:hover .contenido-desplegable {
+    display: block;
+}
+
+.contenido-desplegable li {
+    padding: 0.5rem;
+}
+
+.contenido-desplegable li a {
+    color: #333;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.contenido-desplegable li a:hover {
+    color: #000;
+}
+
+
+.tarjeta {
+    width: calc(100% - 2rem);
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.footer-content {
+    grid-template-areas: "politicas"
+        "redes"
+        "libre licencia";
+    grid-template-columns: 100%;
+}
+.footer-content {
+    grid-template-areas: 
+        "politicas"
+        "redes"
+        "libre";
+    grid-template-columns: 100%;
+}
+
+#licencia {
+    flex-direction: column;
+    justify-content: center;
+}
+
+#licencia img {
+    margin-bottom: 0.5rem;
+}
+
+#licencia p {
+    text-align: center;
+    width: 100%;
+}
+}
+
