@@ -15,12 +15,14 @@ public class GestionProductosTest {
     @Test
     public void ConsultaProductos_Busqueda()throws Exception{
         Gestion_Productos lista = new Gestion_Productos();
-        List<Producto> lista_esperada = lista.TraerProductos("camisa");
+        List<Producto> lista_esperada = lista.TraerProductos("sudadera");
 
         if(!lista_esperada.isEmpty()){
             System.out.println(  lista_esperada.getFirst().toString());
+
         }else{
             System.err.println("Lista Vacia");
+
         }
     }
     //    Test de filtrado por categoria

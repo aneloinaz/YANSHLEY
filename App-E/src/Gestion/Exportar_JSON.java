@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.util.List;
 
 public class Exportar_JSON {
-    private static final String PRODUCTOS_C_JSON = "Catergorias_productos_JSON.json";
+    private static final String PRODUCTOS_C_JSON = "productos.JSON";
     private static final String PATH = "src/JSON/";
     public Boolean Export()throws Exception{
         Gestion_Productos gestionProductos = new Gestion_Productos();
@@ -19,7 +19,8 @@ public class Exportar_JSON {
         if(Listar_Productos.isEmpty()){
             System.err.println("No se encuentran coincidencias");
         }else {
-            ParseJson =  FormatJSON(Listar_Productos);
+            // ParseJson =  FormatJSON(Listar_Productos);
+            ParseJson = FormatJSON(Listar_Productos);
         }
 
         try( FileWriter fileWriter = new FileWriter(PATH+PRODUCTOS_C_JSON);){
@@ -75,4 +76,28 @@ public class Exportar_JSON {
 
         return ParseJson;
     }
+    public StringBuilder CSV(List<Producto> L){
+        StringBuilder texto = new StringBuilder();
+        
+        for(Producto p : L){
+            texto.append(p.getId_producto());
+            texto.append(",");
+            texto.append(p.getNombre());
+            texto.append(",");
+            texto.append(p.getDescripcion());
+            texto.append(p.getPrecio());
+            texto.append(",");
+            texto.append(p.getStock());
+            texto.append(",");
+            texto.append(p.getFecha_creacion());
+            texto.append(",");
+            texto.append(p.getImagen());
+            texto.append(",");
+            texto.append(p.getId_categoria());
+            texto.append("\n");
+        }
+
+        return texto;
+    }
+    
 }
