@@ -63,6 +63,7 @@ nav ul li a img {
 
 nav ul .desplegable:hover .contenido-desplegable {
     display: block;
+    
 }
 
 
@@ -90,6 +91,8 @@ nav ul .desplegable:hover .contenido-desplegable {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 0.5rem;
     z-index: 10;
+    width: 300px; /* Same width as .producto */
+   
 }
 
 .contenido-desplegable li {
@@ -255,7 +258,7 @@ section .newsletter button:hover {
     grid-area: licencia;
     display: flex;
     text-align: right;
-    justify-content: space-between;
+    
 }
 
 #lincencia img {
@@ -394,21 +397,21 @@ nav ul li a:hover {
     margin-right: 0;
     margin-left: 0;
 }
+.footer {
+    grid-area: grid;
+    background-color: #222;
+    color: #fff;
+    padding: 1rem;
+}
 
 .footer-content {
-    grid-template-areas: "politicas"
-        "redes"
+    display: grid;
+    grid-template-areas: "politicas redes"
+        "politicas redes"
         "libre licencia";
-    grid-template-columns: 100%;
+    column-gap: 6%;
+    grid-template-columns: 40% 40%;
 }
-.footer-content {
-    grid-template-areas: 
-        "politicas"
-        "redes"
-        "libre";
-    grid-template-columns: 100%;
-}
-
 #licencia {
     flex-direction: column;
     justify-content: center;
