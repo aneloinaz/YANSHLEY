@@ -12,6 +12,7 @@ public class Export_ImportTests {
     @Test
     public void Export()throws Exception{
         Exportar_JSON ex = new Exportar_JSON();
+        ex.Export_Product();
         // Assert.assertTrue(ex.Export());
     }
     @Test //!!!!!!  NO TOCAAAAAAR
