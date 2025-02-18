@@ -1,6 +1,7 @@
 package Gestion;
 
 import Entidades.Producto;
+import Entidades.Producto_Stock;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -87,8 +88,9 @@ public class Gestion_Productos {
         return response > 0;
     }catch(Exception e){
         System.err.println("Error en la insercion: "+e);
+        return false;
     }
-    return false;
+    
 }
 
 //  MODIFICAR PRODUCTO
@@ -123,8 +125,9 @@ public class Gestion_Productos {
             return response > 0;
         }catch(Exception e) {
             System.err.println("Exrror en la Conexión: "+e);
+            return false;
         }
-        return false;
+       
 
     }
 
@@ -139,11 +142,54 @@ public class Gestion_Productos {
             return response > 0;
         }catch(Exception e){
             System.err.println("Error al Eliminar el producto: "+e);
+            return false;
         }
-        return false;
+        
     }
 
 
+    public List<Producto_Stock> ProductosMenosDeCinto()throws Exception{
+        try(Connection connect = conn.conectar()){
+            String query = "select ID_producto, nombre, stock from producto where stock < 5";
+            CallableStatement cs = connect.prepareCall(query);
+            ResultSet response = cs.executeQuery();
+            List<Producto_Stock> ps = new ArrayList<>();
+            while(response.next()){
+                int id = response.getInt(1);
+                String nombre = response.getString(2);
+                int stock = response.getInt(3);
+                Producto_Stock producto = new Producto_Stock(id,nombre,stock);
+                ps.add(producto);
+            }
+
+            return ps;
+        }catch(Exception e){
+            System.err.println("Error en la consulta");
+            return null;
+        }
+        
+    }
+
+    public List<StringBuilder> Productos_null()throws Exception{
+        try(Connection connect = conn.conectar()){
+            String query ="SELECT Producto.nombre FROM Producto LEFT JOIN detalle_pedido ON producto.ID_producto = detalle_pedido.ID_producto WHERE detalle_pedido.ID_producto IS NULL";
+            CallableStatement cs = connect.prepareCall(query);
+            
+            List<StringBuilder> listaProd = new ArrayList<>();
+            ResultSet response = cs.executeQuery();
+           
+            while(response.next()){
+                StringBuilder nombre = new StringBuilder();
+                nombre.append(response.getString(1));
+                listaProd.add(nombre);
+            }
+            return listaProd;
+        }catch(Exception e){
+            System.err.println("Error en la consulta");
+            return null;
+        }
+       
+    }
 
 //fin
 }
