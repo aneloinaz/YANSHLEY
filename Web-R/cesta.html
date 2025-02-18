@@ -27,15 +27,9 @@
                             <img src="../Web-R/Icons/search-alt-2_svgrepo.com.png" alt="Productos">
                             <span>Productos</span>
                         </a>
-                    
-                    <ul class="contenido-desplegable">
-                        <li><a href="#" class="categoria" categoria-datos="1">PANTALONES</a></li>
-                        <li><a href="#" class="categoria" categoria-datos="2">SUDADERAS</a></li>
-                        <li><a href="#" class="categoria" categoria-datos="3">CAMISETAS</a></li>
-                        <li><a href="#" class="categoria" categoria-datos="4">CAMISAS</a></li>
-                        <li><a href="#" class="categoria" categoria-datos="5">CHAQUETAS</a></li>
-                    </ul>
                 </div>
+                <script src="productos.js"></script>
+                <script src="filtro.js"></script>
             </li>
                 <li>
                     <a href="cesta.html">
@@ -49,19 +43,27 @@
                         <span>Usuario</span>
                     </a>
                 </li>
-            </ul>
+                <li>
+                    <a href="estadistica.html">
+                        <img src="../Web-R/Icons/user_svgrepo.com.png" alt="Usuario">
+                        <span>Estadísticas</span>
+                    </a>
+                </li>
         </nav>
     </header>
+   <main class="carrito">
     <h1>Tu Carrito</h1>
     <div id="carritoContenedor">
         <!-- Aquí se mostrarán los productos del carrito -->
     </div>
-
+<div class="total">
     <h3>Total: <span id="totalCarrito">$0</span></h3>
     
-    <button id="finalizar" onclick="finalizarCompra()">Finalizar compra</button>
-    <button  id="vaciar"  onclick="vaciarCarrito()">Vaciar carrito</button>
-
+    <button  id="vaciar"  onclick="vaciarCarrito()"> <strong>Vaciar carrito </strong></button>
+    <button id="finalizar" onclick="finalizarCompra()"><strong>Finalizar compra </strong></button>
+    
+</div>
+</main>
     <script src="cesta.js"></script> <!-- El archivo JavaScript -->
 
     <footer class="footer">

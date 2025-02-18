@@ -29,7 +29,8 @@ function mostrarCarrito() {
     // Verificación de carrito vacío
     if (total <= 0) {
         alert('No hay productos en el carrito');
-    }
+        window.location.href = 'productos.html';
+        }
 
     // Mostrar el total
     document.getElementById('totalCarrito').textContent = `$${total.toFixed(2)}`;
@@ -115,10 +116,10 @@ function cargarTodosLosProductos() {
                 const div = document.createElement('div');
                 div.innerHTML = `
                     <div class="producto">
-                        <img class="img-producto" src="${imgUrl}" alt="${product.nombre}" style="height:300px;margin-top:20px;" onclick="verProducto(${product.id})" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300?text=No+Image';">
+                        <img src="${imgUrl}" alt="${product.nombre}"  onclick="verProducto(${product.id})" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300?text=No+Image';">
                         <h2 style="height:55px; overflow:hidden;">${product.nombre}</h2>
                         <p><b>${product.precio}€</b></p>
-                        <button style="border: none; background-color: white;">
+                        <button >
                             <a onclick="agregarAlCarrito(${product.id}, '${product.nombre}', '${product.descripcion}', ${product.precio}, ${product.stock}, '${product.imagen}')">Añadir al carrito</a>
                         </button>
                     </div>

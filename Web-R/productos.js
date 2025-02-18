@@ -23,10 +23,10 @@ function cargarTodosLosProductos() {
                  div = document.createElement('div');
                 div.innerHTML = `
                     <div class="producto">
-                        <img class="img-producto" src="${imgUrl}" alt="${product.nombre}" style="height:300px;margin-top:20px;" onclick="verProducto(${product.id})" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300?text=No+Image';">
-                        <h2 style="height:55px; overflow:hidden;">${product.nombre}</h2>
+                        <img  src="${imgUrl}" alt="${product.nombre}"  onclick="verProducto(${product.id})" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300?text=No+Image';">
+                        <h2>${product.nombre}</h2>
                         <p><b>${product.precio}€</b></p>
-                         <button style="border: none; background-color: white;">
+                         <button ">
                         <a onclick="agregarAlCarrito(${product.id}, '${product.nombre}', '${product.descripcion}', ${product.precio}, ${product.stock}, '${product.imagen}')">Añadir al carrito</a>
                     </button>
                     </div>
@@ -64,11 +64,11 @@ function verProducto(productId) {
             const div = document.createElement('div');
             div.innerHTML = `
                 <div class="producto">
-                    <img class="img-producto" src="${imgUrl}" alt="${product.nombre}" style="height:300px;margin-top:20px;" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300?text=No+Image';">
-                    <h2 style="height:55px; overflow:hidden;">${product.nombre}</h2>
+                    <img  src="${imgUrl}" alt="${product.nombre}" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300?text=No+Image';">
+                    <h2 >${product.nombre}</h2>
                     <p><a class="Descripcion" style="height:200px; overflow:auto;">${product.descripcion}</a></p>
                     <p><b>${product.precio}€</b></p>
-                    <button style="border: none; background-color: white;">
+                    <button  ">
                         <a onclick="agregarAlCarrito(${product.id}, '${product.nombre}', '${product.descripcion}', ${product.precio}, ${product.stock}, '${product.imagen}')">Añadir al carrito</a>
                     </button>
                 </div>
@@ -79,37 +79,6 @@ function verProducto(productId) {
         .catch(error => console.error('Error al cargar el producto:', error));
 }
 
-// Función para ver todos los productos de una categoría
-function verCategoria(categoria) {
-    fetch('http://localhost/productos.json')
-        .then(res => {
-            if (!res.ok) throw new Error('Error en la respuesta de la API');
-            return res.json();
-        })
-        .then(products => {
-            const container = document.getElementById('productos-lista');
-            container.innerHTML = '';
-
-            const productosFiltrados = products.filter(product => product.categoria === categoria);
-            productosFiltrados.forEach(product => {
-                const imgUrl = product.imagen.startsWith('http') ? product.imagen : `http://localhost/${product.imagen}`;
-                const div = document.createElement('div');
-                div.innerHTML = `
-                    <div class="producto">
-                        <img class="img-producto" src="${imgUrl}" alt="${product.nombre}" style="height:300px;margin-top:20px;" onclick="verProducto(${product.id})" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300?text=No+Image';">
-                        <h2 style="height:55px; overflow:hidden;">${product.nombre}</h2>
-                        <p><b>${product.precio}€</b></p>
-                         <button style="border: none; background-color: white;">
-                        <a onclick="agregarAlCarrito(${product.id}, '${product.nombre}', '${product.descripcion}', ${product.precio}, ${product.stock}, '${product.imagen}')">Añadir al carrito</a>
-                    </button>
-                    </div>
-                    <br>
-                `;
-                container.appendChild(div);
-            });
-        })
-        .catch(error => console.error('Error al cargar los productos:', error));
-}
 
 // Función para ver todos los productos de una categoría
 function verCategoria(categoria) {
@@ -135,10 +104,10 @@ function verCategoria(categoria) {
                 const div = document.createElement('div');
                 div.innerHTML = `
                     <div class="producto">
-                        <img class="img-producto" src="${imgUrl}" alt="${product.nombre}" style="height:300px;margin-top:20px;" onclick="verProducto(${product.id})" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300?text=No+Image';">
-                        <h2 style="height:55px; overflow:hidden;">${product.nombre}</h2>
+                        <img  src="${imgUrl}" alt="${product.nombre}" onclick="verProducto(${product.id})" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300?text=No+Image';">
+                        <h2 >${product.nombre}</h2>
                         <p><b>${product.precio}€</b></p>
-                         <button style="border: none; background-color: white;">
+                         <button ">
                         <a onclick="agregarAlCarrito(${product.id}, '${product.nombre}', '${product.descripcion}', ${product.precio}, ${product.stock}, '${product.imagen}')">Añadir al carrito</a>
                     </button>
                     </div>
@@ -159,7 +128,7 @@ function filterProducts(categoria) {
 // Llamar la función para cargar todos los productos al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
     cargarTodosLosProductos();
-    document.getElementById('carrito')?.addEventListener('click', verCarrito);
+   // document.getElementById('carrito')?.addEventListener('click', verCarrito);
 
     // Agregar event listeners para filtrar productos por categoría
     document.querySelectorAll('.categoria').forEach(element => {
@@ -172,20 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Llamar la función para cargar todos los productos al cargar la página
-document.addEventListener('DOMContentLoaded', () => {
-    cargarTodosLosProductos();
-    document.getElementById('carrito')?.addEventListener('click', verCarrito);
 
-    // Agregar event listeners para filtrar productos por categoría
-    document.querySelectorAll('.categoria').forEach(element => {
-        element.addEventListener('click', (event) => {
-            event.preventDefault();  // Evita recargar la página
-            const categoria = event.target.getAttribute('categoria-datos');
-            filterProducts(categoria);
-        });
-    });
-});
 
 function agregarAlCarrito(id_producto, nombre, descripcion, precio, stock, imagen) {
     const producto = {
