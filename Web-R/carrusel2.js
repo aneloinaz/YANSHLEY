@@ -9,4 +9,4 @@ index2 = 0;
 const carrusel = document.querySelector('.carrusel2');
 carrusel.style.transform = `translateX(-${index * 100}%)`;
 }
-setInterval(mostrarSlide2, 3000); // Cambia cada 3 segundos
+setInterval(mostrarSlide2, 2999); // Cambia cada 3 segundos

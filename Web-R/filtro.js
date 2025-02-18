@@ -1,5 +1,5 @@
 //Listado de TODOS los productos
-fetch('https://fakestoreapi.com/products')
+/*fetch('https://fakestoreapi.com/products')
     .then(res => res.json())
     .then(json => {
         const container = document.getElementById('producto-container');
@@ -86,4 +86,4 @@ function verCategoria(category) {
             });
         })
         .catch(error => console.error('Error al cargar los productos:', error));
-}
+}*/
