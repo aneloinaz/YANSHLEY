@@ -16,7 +16,8 @@ function mostrarCarrito() {
             <p><strong>Precio: $${producto.precio}</strong></p>
             <p>Cantidad: ${producto.cantidad}</p>
             <button onclick="disminuirCantidad(${producto.id_producto})">-</button> 
-            <button onclick="eliminarProducto(${producto.id_producto})">Eliminar</button>
+            <button onclick="eliminarProducto(${producto.id_producto})"><img src = "../Web-R/Icons/delet.png"  
+            <style width="20" ></button>
             <button onclick="aumentarCantidad(${producto.id_producto})">+</button>
         `;
 
