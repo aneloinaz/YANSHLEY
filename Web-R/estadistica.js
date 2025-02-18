@@ -1,54 +1,51 @@
+// Variables con datos de ejemplo proporcionados
+// Cargar datos con fetch desde el servidor
+let datos = {};
+fetch('http://localhost/estadisticas.json')
+    .then(response => response.json())
+    .then(data => {
+        datos = data;
+    })
+    .catch(error => console.error('Error al cargar datos:', error));
 
-        // Cargar el archivo JSON de estadísticas
-        fetch('estadisticas.json')
-            .then(response => response.json())
-            .then(data => {
-                const selector = document.getElementById('estadisticaSelector');
-                const tituloEstadistica = document.getElementById('tituloEstadistica');
-                const descripcionEstadistica = document.getElementById('descripcionEstadistica');
+// Función para mostrar datos en el div de estadísticas
+const mostrarEstadistica = (titulo, descripcion) => {
+    document.getElementById('tituloEstadistica').textContent = titulo;
+    document.getElementById('descripcionEstadistica').innerHTML = descripcion;
+};
 
-                // Función para actualizar la estadística mostrada
-                function actualizarEstadistica() {
-                    const estadisticaSeleccionada = selector.value;
+// Función principal que gestiona la selección de la estadística
+const gestionarSeleccion = () => {
+    const seleccion = document.getElementById('estadisticaSelector').value;
+    switch(seleccion) {
+        case 'gananciasTotales':
+            mostrarEstadistica('Total de Ganancias', `Total: €${datos.ganancias_total.ganancias}`);
+            break;
+        case 'productosBajoStock':
+            const bajoStock = datos.p_stock_menor_cinco.map(p => `${p.nombre} (Stock: ${p.stock})`).join('<br>');
+            mostrarEstadistica('Productos con stock bajo', bajoStock);
+            break;
+        case 'clientesMasPedidos':
+            const maxPedidos = Math.max(...datos.U_mas_pedidos.map(u => u.pedidos));
+            const clientes = datos.U_mas_pedidos.filter(u => u.pedidos === maxPedidos).map(u => `${u.nombre} (Pedidos: ${u.pedidos})`).join('<br>');
+            mostrarEstadistica('Clientes con más pedidos', clientes);
+            break;
+        case 'gananciasPorMes':
+            const gananciasMes = datos.anio_mes_ganancias.map(g => `${g["Fecha-Mes"]}: €${g.ganancia}`).join('<br>');
+            mostrarEstadistica('Ganancias por Mes', gananciasMes);
+            break;
+        case 'productosNuncaComprados':
+            const nuncaComprados = datos.p_sin_pedidos.map(p => p.nombre).join('<br>');
+            mostrarEstadistica('Productos Nunca Comprados', nuncaComprados);
+            break;
+        case 'productosMasGanancia':
+            const masGanancia = datos.p_mayor_a_quinientos.map(p => `${p.nombre} (€${p.ganancia})`).join('<br>');
+            mostrarEstadistica('Productos con más de 500€ de ganancia', masGanancia);
+            break;
+        default:
+            mostrarEstadistica('Selecciona una estadística', '');
+    }
+};
 
-                    // Mostrar datos según la estadística seleccionada
-                    switch(estadisticaSeleccionada) {
-                        case 'gananciasTotales':
-                            tituloEstadistica.innerText = 'Total de las Ganancias';
-                            descripcionEstadistica.innerText = `Total de ganancias: €${data.gananciasTotales}`;
-                            break;
-                        case 'productosBajoStock':
-                            tituloEstadistica.innerText = 'Productos con stock bajo (<5)';
-                            descripcionEstadistica.innerText = 'Productos con stock bajo: ' + data.productosBajoStock.join(', ');
-                            break;
-                        case 'clientesMasPedidos':
-                            tituloEstadistica.innerText = 'Clientes con más pedidos (10)';
-                            descripcionEstadistica.innerText = 'Clientes con más de 10 pedidos: ' + data.clientesMasPedidos.join(', ');
-                            break;
-                        case 'gananciasPorMes':
-                            tituloEstadistica.innerText = 'Ganancias por Mes';
-                            descripcionEstadistica.innerText = 'Ganancias por mes: ' + data.gananciasPorMes.join(', ');
-                            break;
-                        case 'productosNuncaComprados':
-                            tituloEstadistica.innerText = 'Productos Nunca Comprados';
-                            descripcionEstadistica.innerText = 'Productos nunca comprados: ' + data.productosNuncaComprados.join(', ');
-                            break;
-                        case 'productosMasGanancia':
-                            tituloEstadistica.innerText = 'Productos con más de 500€ de ganancia';
-                            descripcionEstadistica.innerText = 'Productos con más de 500€ de ganancia: ' + data.productosMasGanancia.join(', ');
-                            break;
-                        default:
-                            tituloEstadistica.innerText = 'Selecciona una estadística';
-                            descripcionEstadistica.innerText = 'Aquí aparecerá la información cuando selecciones una estadística.';
-                    }
-                }
-
-                // Actualizar la estadística cada vez que el usuario cambia la selección
-                selector.addEventListener('change', actualizarEstadistica);
-
-                // Inicializar la estadística al cargar
-                actualizarEstadistica();
-            })
-            .catch(error => {
-                console.error('Error al cargar el archivo de estadísticas:', error);
-            });
+// Evento para detectar cambios en el selector
+document.getElementById('estadisticaSelector').addEventListener('change', gestionarSeleccion);
