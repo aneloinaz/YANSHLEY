@@ -11,10 +11,11 @@ public class Usuario {
     private String direccion;
     private String nombre_completo;
     private java.sql.Date fecha_registro;
+    private String rol;
 
     public Usuario(){};
 //    consultar
-    public Usuario(int id_usuario, String dni, String nombre_usuario, String correo_electronico, String telf, String direccion, String nombre_completo, java.sql.Date fecha_registro) {
+    public Usuario(int id_usuario, String dni, String nombre_usuario, String correo_electronico, String telf, String direccion, String nombre_completo, java.sql.Date fecha_registro, String rol) {
         this.id_usuario = id_usuario;
         this.dni = dni;
         this.nombre_usuario = nombre_usuario;
@@ -23,6 +24,7 @@ public class Usuario {
         this.direccion = direccion;
         this.nombre_completo = nombre_completo;
         this.fecha_registro =  fecha_registro;
+        this.rol = rol;
     }
 //    insertar
 
@@ -103,5 +105,13 @@ public class Usuario {
 
     public void setFecha_registro(java.sql.Date fecha_registro) {
         this.fecha_registro = fecha_registro;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 }
