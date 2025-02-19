@@ -55,7 +55,7 @@ public class GestionProductosTest {
     @Test
 public void AgregarProductos_Test() throws Exception {
     Gestion_Productos gestion = new Gestion_Productos();
-    Producto producto = new Producto(24, "Nombre falso", "Descripcion falsa", 99.99, 22, "http://HolaMundo.com", 4);
+    Producto producto = new Producto(22, "Nombre falso", "Descripcion falsa", 99.99, 22, "http://HolaMundo.com", 4);
     gestion.AgregarProducto(producto);
 
     // Retorno de la base de datos
@@ -63,7 +63,7 @@ public void AgregarProductos_Test() throws Exception {
     try (Connection connect = conn.conectar()) {
         String query = "SELECT id_producto, nombre, descripcion, precio, stock, imagen, id_categoria FROM producto WHERE id_producto = ?";
         CallableStatement cs = connect.prepareCall(query);
-        cs.setInt(1, 24);
+        cs.setInt(1, 22);
         ResultSet response = cs.executeQuery();
 
         if (response.next()) { // Mover el cursor a la primera fila
