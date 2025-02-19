@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Cliente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Formulario de Registro de Cliente</h1>
+    </header>
+
+    <div class="container">
+        <h2>Por favor, complete sus datos</h2>
+        
+        <form id="formCliente">
+            <!-- Nombre -->
+            <label for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <!-- Correo electrónico -->
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" name="email" required>
+
+            <!-- Teléfono -->
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" pattern="^\d{9}$" placeholder="Formato: 123456789" required>
+
+            <!-- Dirección -->
+            <label for="direccion">Dirección</label>
+            <textarea id="direccion" name="direccion" rows="4" required></textarea>
+
+            <!-- País -->
+            <label for="pais">País</label>
+            <select id="pais" name="pais" required>
+                <option value="">Seleccione un país</option>
+                <option value="España">España</option>
+                <option value="México">México</option>
+                <option value="Argentina">Argentina</option>
+                <option value="Colombia">Colombia</option>
+                <option value="Chile">Chile</option>
+                <option value="Perú">Perú</option>
+                <!-- Puedes agregar más países aquí -->
+            </select>
+
+            <!-- Botón de envío -->
+            <button type="submit">Enviar</button>
+        </form>
+
+        <!-- Mensaje de confirmación -->
+        <div class="button-container" id="confirmacion" style="display:none;">
+            <p>¡Gracias por registrarte! Tus datos han sido enviados correctamente.</p>
+        </div>
+    </div>
+
+    <script>
+        // Manejar el evento de envío del formulario
+        document.getElementById('formCliente').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evitar que el formulario se envíe de manera tradicional
+
+            // Recoger los datos del formulario
+            const nombre = document.getElementById('nombre').value;
+            const email = document.getElementById('email').value;
+            const telefono = document.getElementById('telefono').value;
+            const direccion = document.getElementById('direccion').value;
+            const pais = document.getElementById('pais').value;
+
+            // Mostrar mensaje de confirmación
+            document.getElementById('confirmacion').style.display = 'block';
+
+            // Aquí podrías agregar código para enviar estos datos al servidor o almacenarlos de alguna manera
+            console.log({
+                nombre,
+                email,
+                telefono,
+                direccion,
+                pais
+            });
+
+            // Limpiar los campos después de enviar
+            document.getElementById('formCliente').reset();
+        });
+    </script>
+
+</body>
+</html>

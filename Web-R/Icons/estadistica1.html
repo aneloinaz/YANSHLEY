@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadísticas de Ganancias y Productos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Estadísticas de la Tienda</h1>
+        
+        <h2>1. Ganancias Totales</h2>
+        <p id="total-ganancias">Cargando...</p>
+
+        <h2>2. Productos con Stock Bajo (menos de 5 unidades)</h2>
+        <table id="productos-bajos-stock">
+            <thead>
+                <tr>
+                    <th>Nombre del Producto</th>
+                    <th>Stock</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Los productos con bajo stock se llenarán aquí -->
+            </tbody>
+        </table>
+
+        <h2>3. Clientes con Más Pedidos (más de 10)</h2>
+        <table id="clientes-mas-pedidos">
+            <thead>
+                <tr>
+                    <th>Nombre del Cliente</th>
+                    <th>Pedidos Realizados</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Los clientes con más pedidos se llenarán aquí -->
+            </tbody>
+        </table>
+
+        <h2>4. Ganancias por Mes</h2>
+        <table id="ganancias-mes">
+            <thead>
+                <tr>
+                    <th>Mes</th>
+                    <th>Ganancias (€)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Las ganancias por mes se llenarán aquí -->
+            </tbody>
+        </table>
+
+        <h2>5. Productos Nunca Comprados</h2>
+        <table id="productos-nunca-comprados">
+            <thead>
+                <tr>
+                    <th>Nombre del Producto</th>
+                    <th>Descripción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Los productos nunca comprados se llenarán aquí -->
+            </tbody>
+        </table>
+
+        <h2>6. Productos con Más de 500€ de Ganancia</h2>
+        <table id="productos-mas-500">
+            <thead>
+                <tr>
+                    <th>Nombre del Producto</th>
+                    <th>Ganancia (€)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Los productos con más de 500€ de ganancia se llenarán aquí -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Datos de ejemplo (estos deberían ser reemplazados por tus datos reales o provenientes de una API)
+        const productos = [
+            { id: 1, nombre: 'Producto A', stock: 4, precio: 50, ventas: 100, ganancias: 500 },
+            { id: 2, nombre: 'Producto B', stock: 20, precio: 30, ventas: 50, ganancias: 150 },
+            { id: 3, nombre: 'Producto C', stock: 2, precio: 80, ventas: 30, ganancias: 240 },
+            { id: 4, nombre: 'Producto D', stock: 0, precio: 40, ventas: 70, ganancias: 280 }
+        ];
+
+        const clientes = [
+            { nombre: 'Cliente 1', pedidos: 15 },
+            { nombre: 'Cliente 2', pedidos: 5 },
+            { nombre: 'Cliente 3', pedidos: 20 },
+            { nombre: 'Cliente 4', pedidos: 10 }
+        ];
+
+        const ventasPorMes = [
+            { mes: 'Enero', ganancias: 1000 },
+            { mes: 'Febrero', ganancias: 1200 },
+            { mes: 'Marzo', ganancias: 1500 }
+        ];
+
+        const productosNuncaComprados = [
+            { nombre: 'Producto X', descripcion: 'Descripción del Producto X' },
+            { nombre: 'Producto Y', descripcion: 'Descripción del Producto Y' }
+        ];
+
+        // Cargar estadísticas
+        function cargarEstadisticas() {
+            // 1. Ganancias Totales
+            const totalGanancias = productos.reduce((acc, producto) => acc + producto.ganancias, 0);
+            document.getElementById('total-ganancias').innerText = `€${totalGanancias}`;
+
+            // 2. Productos con Stock Bajo (< 5)
+            const productosBajosStock = productos.filter(producto => producto.stock < 5);
+            const productosBajosStockTableBody = document.getElementById('productos-bajos-stock').getElementsByTagName('tbody')[0];
+            productosBajosStock.forEach(producto => {
+                const row = productosBajosStockTableBody.insertRow();
+                row.innerHTML = `<td>${producto.nombre}</td><td>${producto.stock}</td>`;
+            });
+
+            // 3. Clientes con Más de 10 Pedidos
+            const clientesMasPedidos = clientes.filter(cliente => cliente.pedidos > 10);
+            const clientesMasPedidosTableBody = document.getElementById('clientes-mas-pedidos').getElementsByTagName('tbody')[0];
+            clientesMasPedidos.forEach(cliente => {
+                const row = clientesMasPedidosTableBody.insertRow();
+                row.innerHTML = `<td>${cliente.nombre}</td><td>${cliente.pedidos}</td>`;
+            });
+
+            // 4. Ganancias por Mes
+            const gananciasMesTableBody = document.getElementById('ganancias-mes').getElementsByTagName('tbody')[0];
+            ventasPorMes.forEach(venta => {
+                const row = gananciasMesTableBody.insertRow();
+                row.innerHTML = `<td>${venta.mes}</td><td>€${venta.ganancias}</td>`;
+            });
+
+            // 5. Productos Nunca Comprados
+            const productosNuncaCompradosTableBody = document.getElementById('productos-nunca-comprados').getElementsByTagName('tbody')[0];
+            productosNuncaComprados.forEach(producto => {
+                const row = productosNuncaCompradosTableBody.insertRow();
+                row.innerHTML = `<td>${producto.nombre}</td><td>${producto.descripcion}</td>`;
+            });
+
+            // 6. Productos con Más de 500€ de Ganancia
+            const productosMas500 = productos.filter(producto => producto.ganancias > 500);
+            const productosMas500TableBody = document.getElementById('productos-mas-500').getElementsByTagName('tbody')[0];
+            productosMas500.forEach(producto => {
+                const row = productosMas500TableBody.insertRow();
+                row.innerHTML = `<td>${producto.nombre}</td><td>€${producto.ganancias}</td>`;
+            });
+        }
+
+        // Llamar a la función para cargar las estadísticas cuando la página se cargue
+        document.addEventListener('DOMContentLoaded', cargarEstadisticas);
+    </script>
+</body>
+</html>
