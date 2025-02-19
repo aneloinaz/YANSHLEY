@@ -9,10 +9,10 @@ import java.io.File;
 
 import org.junit.Assert;
 import org.junit.Test;
-
+///pedido en los requerimientos 
 public class Export_ImportTests {
-    @Test
-public void Export_Test() throws Exception {
+    @Test  // Este se auto elimina , si se quiere ver si lo crea solo desactivar la eliminación
+public void Export_Product() throws Exception {
     // Crear una instancia de la clase Exportar_JSON
     Exportar_JSON exportarJson = new Exportar_JSON();
     
@@ -32,7 +32,7 @@ public void Export_Test() throws Exception {
     }
 }
 
-    @Test //!!!!!!  NO TOCAAAAAAR
+    @Test //!!!!!!  NO TOCAAAAAAR si ya se ejecutó una vez , este inserta todos los productos a la base de datos
     public void Import()throws Exception{
         Cargar_CSV c = new Cargar_CSV();
         assertTrue(c.Cargar_Productos());

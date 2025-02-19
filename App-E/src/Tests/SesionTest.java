@@ -9,21 +9,21 @@ public class SesionTest {
 //    Usuario valido
     @Test
     public void test_UsuarioValido()throws Exception{
-        String email = "ikerb@email.com";
-        String password = "14e1b600b1fd579f47433b88e8d85291";
+        String email = "admin@gmail.com";
+        String password = "admin";
         Assert.assertEquals(true,login.Sesion(email, password));
     }
 //    email incorrecto
     @Test
     public void test_EmailIncorrecto()throws Exception{
-        String email = "ikerb@email.comx";
-        String password = "14e1b600b1fd579f47433b88e8d85291x";
+        String email = "emailfalso@gmail.com";
+        String password = "falso";
         Assert.assertFalse(login.Sesion(email,password));
     }
 //    Contraseña invalida
     @Test
     public void test_ContraseñaInvalida()throws Exception{
-        String email = "ikerb@email.com";
+        String email = "admin@gmail.com";
         String password = "14e1b600b1fd5";
         Assert.assertFalse(login.Sesion(email,password));
     }

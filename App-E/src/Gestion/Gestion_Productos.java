@@ -14,21 +14,28 @@ public class Gestion_Productos {
     static ConexionBD conn = new ConexionBD();
 
 //    sobrecarga de metodos
-
+    
 //    Traer todos los productos
-    public List<Producto> TraerProductos()throws Exception{
-        return TraerProductos(null, -1);
+    public List<Producto> TraerProductos(boolean order)throws Exception{
+        return TraerProductos(order,null, -1);
     }
 // Filtrado por Categoria
-    public List<Producto> TraerProductos(int id_categoria)throws Exception{
-        return TraerProductos(null, id_categoria); //va a generar error
+    public List<Producto> TraerProductos(boolean order,int id_categoria)throws Exception{
+        return TraerProductos(order,null, id_categoria); //va a generar error
     }
 //    filtrar por busqueda
-    public List<Producto> TraerProductos(String buscar)throws Exception{
-        return TraerProductos(buscar, -1); //va a generar error
+    public List<Producto> TraerProductos(boolean order,String buscar)throws Exception{
+        return TraerProductos(order, buscar, -1); //va a generar error
     }
 // Metodo principal de listado de productos
-    public List<Producto> TraerProductos( String filtrar, int categoria )throws Exception{
+    public List<Producto> TraerProductos(boolean order, String filtrar, int categoria )throws Exception{
+        String orderString = "nombre";
+        if(order == true){
+            orderString = "precio";
+        }else{
+            orderString = "stock";
+        }
+
         List<Producto> Lista_productos = new ArrayList<>();
         try( Connection connect = conn.conectar() ){
             String query = null;
@@ -36,21 +43,33 @@ public class Gestion_Productos {
 
             if( filtrar==null && categoria!=-1 ){
                 //        Si se le pasa -1 a categoria , pero se le pasa un dato valido a filtro entonces hace el filtrado por busqueda
-                query = "SELECT p.*,c.nombre FROM producto as p INNER JOIN categoria AS c ON p.ID_categoria = c.ID_categoria WHERE c.ID_categoria = ? ORDER BY p.precio ASC";
+                if(order){
+                    query = "SELECT p.*,c.nombre FROM producto as p INNER JOIN categoria AS c ON p.ID_categoria = c.ID_categoria WHERE c.ID_categoria = ? ORDER BY p.precio ASC";
+                }else{
+                    query = "SELECT p.*,c.nombre FROM producto as p INNER JOIN categoria AS c ON p.ID_categoria = c.ID_categoria WHERE c.ID_categoria = ? ORDER BY p.stock ASC";
+                }
                 CallableStatement cs = connect.prepareCall(query);
                 cs.setInt(1,categoria);
                 response = cs.executeQuery();
             }else if( filtrar!=null && categoria==-1 ){//        Si se le pasa -1 a filtro , pero se le pasa un dato valido a categoria entonces hace el filtrado por categorias
-                query = "SELECT * FROM producto WHERE descripcion LIKE (?)";
+                if(order){
+                    query = "SELECT * FROM producto WHERE descripcion LIKE (?) ORDER BY precio ASC";
+                }else{
+                    query = "SELECT * FROM producto WHERE descripcion LIKE (?) ORDER BY stock ASC";
+                }
                 CallableStatement cs = connect.prepareCall(query);
                 cs.setString(1,"%"+filtrar+"%");
                 response = cs.executeQuery();
             }else if(filtrar!=null && categoria!=-1){
-//            Aqui se aplicaria la casuistica de que se filtre los resultados personalizados por categoria
+//            Aqui se aplicaria la casuistica de que se filtre los resultados personalizados por TERMINOS DE BÚSQUEDA Y categoria
 //            No se va a aplicar debido a que no está en los requerimientos, pero para no dejar con la duda de que pasaria si se le pasan ambos props, por eso lo explico
             }else{
 //            Ya que tanto categoria como filtrar son valores null entonces se hace la consulta de todos los productos
-                query = "SELECT * FROM producto";
+                if(order){
+                    query = "SELECT * FROM producto ORDER BY precio ASC";
+                }else{
+                    query = "SELECT * FROM producto ORDER BY stock ASC";
+                }
                 CallableStatement cs = connect.prepareCall(query);
                 response = cs.executeQuery();
             }

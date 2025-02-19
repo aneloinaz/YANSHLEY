@@ -17,7 +17,7 @@ public class Exportar_JSON {
     private static final String PATH = "src/JSON/";
     public Boolean Export_Product()throws Exception{
         Gestion_Productos gestionProductos = new Gestion_Productos();
-        List<Producto>Listar_Productos  = gestionProductos.TraerProductos();
+        List<Producto>Listar_Productos  = gestionProductos.TraerProductos(true);
 
         File file = new File(PRODUCTOS_C_JSON);
 

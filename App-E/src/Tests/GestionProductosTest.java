@@ -19,7 +19,7 @@ public class GestionProductosTest {
     @Test
     public void ConsultaProductos_Busqueda()throws Exception{
         Gestion_Productos lista = new Gestion_Productos();
-        List<Producto> lista_esperada = lista.TraerProductos("sudadera");
+        List<Producto> lista_esperada = lista.TraerProductos(true,"sudadera");
 
         if(!lista_esperada.isEmpty()){
             System.out.println(  lista_esperada.getFirst().toString());
@@ -33,7 +33,7 @@ public class GestionProductosTest {
     @Test
     public void ConsultaProductos_Categoria()throws Exception{
         Gestion_Productos lista = new Gestion_Productos();
-        List<Producto> lista_esperada = lista.TraerProductos(1);
+        List<Producto> lista_esperada = lista.TraerProductos(true,1);
         if(!lista_esperada.isEmpty()){
             System.out.println(  lista_esperada.getFirst().toString());
         }else{
@@ -44,18 +44,18 @@ public class GestionProductosTest {
     @Test
     public void ConsultaProductos_Todos()throws Exception{
         Gestion_Productos lista = new Gestion_Productos();
-        List<Producto> lista_esperada = lista.TraerProductos();
+        List<Producto> lista_esperada = lista.TraerProductos(true);
         if(!lista_esperada.isEmpty()){
             System.out.println(  lista_esperada.getFirst().toString());
         }else{
             System.err.println("Lista Vacia");
         }
     }
-    //     Agregar Productos
+    //     Agregar Productos ///pedido en los requerimientos
     @Test
 public void AgregarProductos_Test() throws Exception {
     Gestion_Productos gestion = new Gestion_Productos();
-    Producto producto = new Producto(27, "Nombre falso", "Descripcion falsa", 99.99, 22, "http://HolaMundo.com", 4);
+    Producto producto = new Producto(24, "Nombre falso", "Descripcion falsa", 99.99, 22, "http://HolaMundo.com", 4);
     gestion.AgregarProducto(producto);
 
     // Retorno de la base de datos
@@ -63,7 +63,7 @@ public void AgregarProductos_Test() throws Exception {
     try (Connection connect = conn.conectar()) {
         String query = "SELECT id_producto, nombre, descripcion, precio, stock, imagen, id_categoria FROM producto WHERE id_producto = ?";
         CallableStatement cs = connect.prepareCall(query);
-        cs.setInt(1, 27);
+        cs.setInt(1, 24);
         ResultSet response = cs.executeQuery();
 
         if (response.next()) { // Mover el cursor a la primera fila
@@ -91,7 +91,7 @@ public void AgregarProductos_Test() throws Exception {
     }
 }
 
-    //  Modificar Productos
+    //  Modificar Productos ///pedido en los requerimientos
     @Test
 public void ModificarProducto_Test() throws Exception {
     // Datos de la modificación
@@ -128,7 +128,7 @@ public void ModificarProducto_Test() throws Exception {
     }
 }
 
-//    Eliminar Producto
+//    Eliminar Producto ///pedido en los requerimientos
 @Test
 public void EliminarProducto_Test() throws Exception {
     // Instancia de la gestión de productos

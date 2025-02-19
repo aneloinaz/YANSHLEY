@@ -21,21 +21,54 @@ public class App {
             System.out.println("\n*************************************************\n");
             System.out.println("\nELIGE UNA OPCIÓN: ");
             int option = Menu_Principal();
+            int order = 0;
             switch (option) {
                 case 1:
-                    Option1();
+                while (true) {
+                    System.out.println("SELECCIONA EL ORDEN EN EL QUE QUIERES QUE APAREZCAN: 1=precio, 2=stock ");
+                    order = ValidacionEntero();
+                    sc.nextLine();
+                    if(order==1 || order==2){
+                        break;
+                    }else{
+                        System.err.println("\nERROR: INGRESA UNA DE LAS OPCCIONES DISPONIBLES\n");
+                    }
+                }
+                    
+                    Option1(order);
                     value = SalirSN();
                     break;
                 case 2:
                     System.out.println("SELECCIONA EL ID DE UNA CATEGORÍA: ");
                     int categoria = Mostrar_Categorias();
-                    Option2(categoria);
+                    while (true) {
+                        System.out.println("SELECCIONA EL ORDEN EN EL QUE QUIERES QUE APAREZCAN: 1=disponibilidad, 2=stock ");
+                        order = ValidacionEntero();
+                        sc.nextLine();
+                        if(order==1 || order==2){
+                            break;
+                        }else{
+                            System.err.println("\nERROR: INGRESA UNA DE LAS OPCCIONES DISPONIBLES\n");
+                        }
+                    }
+                    
+                    Option2(order,categoria);
                     value = SalirSN();
                     break;
                 case 3:
                     System.out.println("INGRESA EL TERMINO DE BÚSQUEDA: ");
                     String termino = sc.nextLine();
-                    Option3(termino);
+                    while (true) {
+                        System.out.println("SELECCIONA EL ORDEN EN EL QUE QUIERES QUE APAREZCAN: 1=disponibilidad, 2=stock ");
+                        order = ValidacionEntero();
+                        sc.nextLine();
+                        if(order==1 || order==2){
+                            break;
+                        }else{
+                            System.err.println("\nERROR: INGRESA UNA DE LAS OPCCIONES DISPONIBLES\n");
+                        }
+                    }
+                    Option3(order,termino);
                     value = SalirSN();
                     break;
                 case 4:
@@ -50,7 +83,7 @@ public class App {
                     System.out.println("ACTUALIZA UN PRODUCTO: ");
                     System.out.println("\n*************************************************\n");
                     System.out.print("INGRESA EL ID DEL PRODUCTO A MODIFICAR:  ");
-                    int id = sc.nextInt();
+                    int id = ValidacionEntero();
                     sc.nextLine();
                     Option5(id);
                     value = SalirSN();
@@ -60,7 +93,7 @@ public class App {
                     System.out.println("ELIMINAR UN PRODUCTO ");
                     System.out.println("\n*************************************************\n");
                     System.out.println("INGRESA EL ID DEL PRODUCTO A ELIMINAR:   ");
-                    int id_eliminar = sc.nextInt();
+                    int id_eliminar = ValidacionEntero();
                     sc.nextLine();
                     Option6(id_eliminar);
                     value = SalirSN();
@@ -133,10 +166,14 @@ public static int Mostrar_Categorias()throws Exception{
         return option;
     }
     
-public static void Option1()throws Exception{
+public static void Option1(int order)throws Exception{
         Clear();
+        boolean v = false;
+        if(order==1){
+            v = true;
+        }
         Gestion_Productos g = new Gestion_Productos();
-        List<Producto> productos = g.TraerProductos();
+        List<Producto> productos = g.TraerProductos(v);
         System.out.println("\n*************************************************\n");
         System.out.println("LISTA DE TODOS LOS PRODUCTOS");
         System.out.println("\n*************************************************\n");
@@ -146,10 +183,14 @@ public static void Option1()throws Exception{
         }
     }
     
-public static void Option2(int option)throws Exception{
+public static void Option2(int order,int option)throws Exception{
     Clear();
+    boolean v = true;
+        if(order==1){
+            v = true;
+        }
         Gestion_Productos g = new Gestion_Productos();
-        List<Producto> productos = g.TraerProductos(option);
+        List<Producto> productos = g.TraerProductos(v,option);
         System.out.println("\n*************************************************\n");
         System.out.println("PRODUCTOS DE CATEGORÍA ID : "+option);
         System.out.println("\n*************************************************\n");
@@ -159,10 +200,14 @@ public static void Option2(int option)throws Exception{
         }
     }
 
-public static void Option3(String termino) throws Exception{
+public static void Option3(int order,String termino) throws Exception{
     Clear();
+    boolean v = true;
+        if(order==1){
+            v = true;
+        }
     Gestion_Productos g = new Gestion_Productos();
-    List<Producto> productos = g.TraerProductos(termino);
+    List<Producto> productos = g.TraerProductos(v,termino);
     System.out.println("\n*************************************************\n");
     System.out.println("Coincidencias con: "+termino);
 
