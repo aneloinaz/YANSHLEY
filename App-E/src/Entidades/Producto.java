@@ -9,6 +9,17 @@ public class Producto {
     private java.sql.Date fecha_creacion;
     private String imagen;
     private int id_categoria;
+    // insertar para Test
+    public Producto(int id_producto, String nombre, String descripcion, double precio, int stock,String imagen, int id_categoria) {
+        this.id_producto = id_producto;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.stock = stock;
+        this.fecha_creacion = new java.sql.Date(System.currentTimeMillis());
+        this.imagen = imagen;
+        this.id_categoria = id_categoria;
+    }
 
 //    consultar
     public Producto(String nombre, int id_producto, String descripcion, double precio, int stock, java.sql.Date fecha_creacion, String imagen, int id_categoria) {
@@ -100,15 +111,13 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Producto{" +
-                "nombre='" + nombre + '\'' +
-                ", id_producto=" + id_producto +
-                ", descripcion='" + descripcion + '\'' +
-                ", precio=" + precio +
-                ", stock=" + stock +
-                ", fecha_creacion=" + fecha_creacion +
-                ", imagen='" + imagen + '\'' +
-                ", id_categoria=" + id_categoria +
-                '}';
+        return
+                "ID = " + id_producto + "\n" +
+                "NOMBRE = " + nombre + "\n" +
+                "DESCRIPCIÓN = " + descripcion + "\n" +
+                "PRECIO = " + precio + "\n" +
+                "STOCK = " + stock + "\n" +
+                "FECHA DE CREACIÓN = " + fecha_creacion + "\n" +
+                "ID DE CATEGORÍA = " + id_categoria; 
     }
 }

@@ -23,10 +23,15 @@ public class Gestion_Usuarios{
                 Usuario_Pedidos usuario = new Usuario_Pedidos(id,nombre_user,CatidadPedido);
                 usuario_p.add(usuario);
             }
+            if(usuario_p.isEmpty()){
+                System.err.println("No exite resultado en la consulta: Usuarios con Más Pedidos");
+                return null;
+            }
             return usuario_p;
         }catch(Exception e){
-            System.err.println("Error en la consulta"+e);
+            System.err.println("Error en la consulta : Usuarios con más pedidos"+e);
+            return null;
         }
-        return null;
+        
     }
 }

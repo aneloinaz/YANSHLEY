@@ -1,14 +1,12 @@
 package Entidades;
 
-public class Cateogria {
+public class Categoria {
     private int id_categoria;
     private String nombre;
-    private String descripcion;
 
-    public Cateogria(int id_categoria, String nombre, String descripcion) {
+    public Categoria(int id_categoria, String nombre) {
         this.id_categoria = id_categoria;
         this.nombre = nombre;
-        this.descripcion = descripcion;
     }
 
     public int getId_categoria() {
@@ -23,12 +21,11 @@ public class Cateogria {
         this.nombre = nombre;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    @Override
+    public String toString(){
+        return
+            "ID = " + id_categoria + "\n" +
+            "CATEGORIA = " +nombre;
     }
 
 }

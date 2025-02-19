@@ -139,7 +139,7 @@ public class Exportar_JSON {
             texto.append(p.getId_categoria());
             texto.append("\n");
         }
-
+        System.out.println("\nCSV CARGADO\n");
         return texto;
     }
     private void removeLastComma(StringBuilder sb) {
@@ -153,7 +153,7 @@ public class Exportar_JSON {
     public StringBuilder FormatJSON_stats(HashMap<StringBuilder, Double> Lista, HashMap<String, Double> mesesGanacias, List<StringBuilder> L_productos_null, List<Producto_Stock> L_productos_M5, double ganancias, List<Usuario_Pedidos> usuario_p) {
         StringBuilder ParseJson = new StringBuilder("{\n"); // Inicio del JSON
     
-        // 🔹 Productos con ganancias mayores a 500
+        // Productos con ganancias mayores a 500
         ParseJson.append("\"p_mayor_a_quinientos\": [");
         for (Map.Entry<StringBuilder, Double> item : Lista.entrySet()) {
             ParseJson.append("{");
@@ -164,7 +164,7 @@ public class Exportar_JSON {
         removeLastComma(ParseJson);
         ParseJson.append("],\n");
     
-        // 🔹 Ganancias por mes
+        // Ganancias por mes
         ParseJson.append("\"anio_mes_ganancias\": [");
         for (Map.Entry<String, Double> item : mesesGanacias.entrySet()) {
             ParseJson.append("{");
@@ -175,7 +175,7 @@ public class Exportar_JSON {
         removeLastComma(ParseJson);
         ParseJson.append("],\n");
     
-        // 🔹 Productos sin pedidos
+        // Productos sin pedidos
         ParseJson.append("\"p_sin_pedidos\": [");
         for (StringBuilder item : L_productos_null) {
             ParseJson.append("{");
@@ -185,7 +185,7 @@ public class Exportar_JSON {
         removeLastComma(ParseJson);
         ParseJson.append("],\n");
     
-        // 🔹 Productos con stock menor a 5
+        // Productos con stock menor a 5
         ParseJson.append("\"p_stock_menor_cinco\": [");
         for (Producto_Stock item : L_productos_M5) {
             ParseJson.append("{");
@@ -197,12 +197,12 @@ public class Exportar_JSON {
         removeLastComma(ParseJson);
         ParseJson.append("],\n");
     
-        // 🔹 Ganancias totales
+        // Ganancias totales
         ParseJson.append("\"ganancias_total\": {");
         ParseJson.append("\"ganancias\": ").append(ganancias);
         ParseJson.append("},\n");
     
-        // 🔹 Usuarios con más pedidos
+        // Usuarios con más pedidos
         ParseJson.append("\"U_mas_pedidos\": [");
         for (Usuario_Pedidos item : usuario_p) {
             ParseJson.append("{");

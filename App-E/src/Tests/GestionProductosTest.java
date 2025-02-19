@@ -1,10 +1,14 @@
 package Tests;
 
 import Entidades.Producto;
+import Gestion.ConexionBD;
 import Gestion.Gestion_Productos;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,24 +53,107 @@ public class GestionProductosTest {
     }
     //     Agregar Productos
     @Test
-    public void AgregarProductos_Test()throws Exception{
-        Gestion_Productos gestion = new Gestion_Productos();
-        Producto producto = new Producto("Nombre falso","Descripcion falsa",99.99,22,"http://HolaMundo.com",4);
-        Assert.assertTrue(gestion.AgregarProducto(producto));
+public void AgregarProductos_Test() throws Exception {
+    Gestion_Productos gestion = new Gestion_Productos();
+    Producto producto = new Producto(27, "Nombre falso", "Descripcion falsa", 99.99, 22, "http://HolaMundo.com", 4);
+    gestion.AgregarProducto(producto);
+
+    // Retorno de la base de datos
+    ConexionBD conn = new ConexionBD();
+    try (Connection connect = conn.conectar()) {
+        String query = "SELECT id_producto, nombre, descripcion, precio, stock, imagen, id_categoria FROM producto WHERE id_producto = ?";
+        CallableStatement cs = connect.prepareCall(query);
+        cs.setInt(1, 27);
+        ResultSet response = cs.executeQuery();
+
+        if (response.next()) { // Mover el cursor a la primera fila
+            int id = response.getInt(1);
+            String nombre = response.getString(2);
+            String descripcion = response.getString(3);
+            double precio = response.getDouble(4); // Ahora correctamente como double
+            int stock = response.getInt(5);
+            String imagen = response.getString(6);
+            int id_categoria = response.getInt(7);
+
+            Producto producto_db = new Producto(id, nombre, descripcion, precio, stock, imagen, id_categoria);
+
+            Assert.assertEquals(producto.getNombre(), producto_db.getNombre());
+            Assert.assertEquals(producto.getDescripcion(), producto_db.getDescripcion());
+            Assert.assertEquals(producto.getPrecio(), producto_db.getPrecio(), 0.0001); // Usando delta para double
+            Assert.assertEquals(producto.getStock(), producto_db.getStock());
+            Assert.assertEquals(producto.getImagen(), producto_db.getImagen());
+            Assert.assertEquals(producto.getId_categoria(), producto_db.getId_categoria());
+        } else {
+            Assert.fail("No se encontró el producto en la base de datos.");
+        }
+    } catch (Exception e) {
+        Assert.fail("Error en el Test de consulta: " + e.getMessage());
     }
+}
+
     //  Modificar Productos
     @Test
-    public void ModificarProducto()throws Exception{
-        Map<String, Object> producto = new HashMap<>();
-        producto.put("nombre","Camisa Moderna");
-        producto.put("precio",19.99);
-        Gestion_Productos gestion = new Gestion_Productos();
-        Assert.assertTrue(gestion.ModificarProducto(producto,12));
+public void ModificarProducto_Test() throws Exception {
+    // Datos de la modificación
+    Map<String, Object> producto = new HashMap<>();
+    producto.put("nombre", "Camisa Moderna mofy");
+    producto.put("precio", 19.99);
+
+    // Instancia de la gestión de productos
+    Gestion_Productos gestion = new Gestion_Productos();
+    
+    // Se ejecuta la modificación y se verifica que devuelva true
+    Assert.assertTrue("La modificación del producto falló", gestion.ModificarProducto(producto, 12));
+
+    // Conexión a la base de datos para verificar los cambios
+    ConexionBD conn = new ConexionBD();
+    try (Connection connect = conn.conectar()) {
+        String query = "SELECT nombre, precio FROM producto WHERE id_producto = ?";
+        CallableStatement cs = connect.prepareCall(query);
+        cs.setInt(1, 12);
+        ResultSet response = cs.executeQuery();
+
+        if (response.next()) { // Se mueve a la primera fila
+            String nombre_db = response.getString("nombre");
+            double precio_db = response.getDouble("precio");
+
+            // Verificamos que los datos sean los correctos
+            Assert.assertEquals("El nombre no se actualizó correctamente", "Camisa Moderna mofy", nombre_db);
+            Assert.assertEquals("El precio no se actualizó correctamente", 19.99, precio_db, 0.0001);
+        } else {
+            Assert.fail("No se encontró el producto en la base de datos después de la modificación.");
+        }
+    } catch (Exception e) {
+        Assert.fail("Error en el Test de modificación: " + e.getMessage());
     }
+}
+
 //    Eliminar Producto
-    @Test
-    public void EliminarProducto()throws Exception{
-        Gestion_Productos gestion = new Gestion_Productos();
-        Assert.assertTrue(gestion.EliminarProducto(25));
+@Test
+public void EliminarProducto_Test() throws Exception {
+    // Instancia de la gestión de productos
+    Gestion_Productos gestion = new Gestion_Productos();
+
+    // Elimina el producto con id 25
+    Assert.assertTrue("La eliminación del producto falló", gestion.EliminarProducto(26));
+
+    // Conexión a la base de datos para verificar si el producto fue eliminado
+    ConexionBD conn = new ConexionBD();
+    try (Connection connect = conn.conectar()) {
+        String query = "SELECT id_producto FROM producto WHERE id_producto = ?";
+        CallableStatement cs = connect.prepareCall(query);
+        cs.setInt(1, 26);
+        ResultSet response = cs.executeQuery();
+
+        if (response.next()) {
+            Assert.fail("El producto no fue eliminado correctamente.");
+        } else {
+            // Si no hay resultados, el producto fue correctamente eliminado
+            System.out.println("El producto fue eliminado correctamente.");
+        }
+    } catch (Exception e) {
+        Assert.fail("Error en el Test de eliminación: " + e.getMessage());
     }
+}
+
 }
