@@ -114,7 +114,7 @@ public class App {
         
         
     }
-
+//Manejo de sesion
 public static void Sesion() throws Exception{
         System.out.println("\n----------------------------------------------------\n");
         Gestion_Acceso g = new Gestion_Acceso();
@@ -148,7 +148,7 @@ public static int Menu_Principal(){
         Clear();
         return option;
     }
-
+//Listar por categorias
 public static int Mostrar_Categorias()throws Exception{
         Clear();
         Gestion_Categoria g = new Gestion_Categoria();
@@ -165,7 +165,7 @@ public static int Mostrar_Categorias()throws Exception{
         sc.nextLine();
         return option;
     }
-    
+    //Listar todos los productos
 public static void Option1(int order)throws Exception{
         Clear();
         boolean v = false;
@@ -199,6 +199,7 @@ public static void Option2(int order,int option)throws Exception{
             System.out.println("\n_____________________________________________\n");
         }
     }
+// Productos por termino de busqueda
 
 public static void Option3(int order,String termino) throws Exception{
     Clear();
