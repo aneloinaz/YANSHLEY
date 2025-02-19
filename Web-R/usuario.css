@@ -1,6 +1,12 @@
-.InicioSesion {
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+.container {
     max-width: 400px;
-    margin: 100px auto;
+    margin: 50px auto;
     background-color: white;
     padding: 20px;
     border-radius: 10px;
@@ -9,7 +15,7 @@
 h2 {
     text-align: center;
 }
-input[type="email"], input[type="password"] {
+input[type="text"], input[type="email"], input[type="password"] , input[type="telefono"]{
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -28,7 +34,7 @@ button {
     cursor: pointer;
 }
 button:hover {
-    background-color: #45a049;
+    background-color: #a0454b;
 }
 .message {
     text-align: center;
