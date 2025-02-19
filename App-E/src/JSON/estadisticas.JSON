@@ -65,6 +65,15 @@
         },
         {
             "nombre": "Chaqueta impermeable"
+        },
+        {
+            "nombre": "Nombre falso"
+        },
+        {
+            "nombre": "Nombre falso"
+        },
+        {
+            "nombre": "Nombre falso"
         }
     ],
     "p_stock_menor_cinco": [
@@ -80,7 +89,7 @@
         },
         {
             "id": 2,
-            "nombre": "Camisa Moderna",
+            "nombre": "Camisa Moderna mofy",
             "stock": 2
         },
         {
@@ -104,16 +113,6 @@
             "pedidos": 6
         },
         {
-            "id": 8,
-            "nombre": "itziah",
-            "pedidos": 3
-        },
-        {
-            "id": 5,
-            "nombre": "unaiog",
-            "pedidos": 3
-        },
-        {
             "id": 10,
             "nombre": "nereai",
             "pedidos": 3
@@ -131,6 +130,16 @@
         {
             "id": 3,
             "nombre": "gorkaa",
+            "pedidos": 3
+        },
+        {
+            "id": 8,
+            "nombre": "itziah",
+            "pedidos": 3
+        },
+        {
+            "id": 5,
+            "nombre": "unaiog",
             "pedidos": 3
         },
         {

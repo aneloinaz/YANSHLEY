@@ -46,7 +46,7 @@ public class Gestion_Pedidos{
 
     public HashMap<StringBuilder, Double> Ganancias_Mas500()throws Exception{
         try(Connection connect = conn.conectar()){
-            String query = "SELECT Producto.nombre, SUM(Detalle_pedido.precio * Detalle_pedido.cantidad) AS total_ganancia FROM Producto JOIN Detalle_pedido ON Producto.ID_producto = Detalle_pedido.ID_producto GROUP BY Producto.ID_producto HAVING total_ganancia > 500;";
+            String query = "SELECT producto.nombre, SUM(detalle_pedido.precio * detalle_pedido.cantidad) AS total_ganancia FROM producto JOIN detalle_pedido ON producto.ID_producto = detalle_pedido.ID_producto GROUP BY producto.ID_producto HAVING total_ganancia > 500;";
             CallableStatement cs = connect.prepareCall(query);
             ResultSet response = cs.executeQuery();
             HashMap<StringBuilder, Double> Lista = new HashMap<>();
