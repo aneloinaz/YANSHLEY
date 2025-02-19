@@ -87,16 +87,26 @@ function eliminarProducto(id_producto) {
 
 // Función para vaciar el carrito
 function vaciarCarrito() {
-    localStorage.removeItem('carrito');  // Eliminar carrito del localStorage
-    mostrarCarrito();  // Actualizar la vista del carrito
+    if (confirm('¿Estás seguro de vaciar el carrito?')) {
+        // Confirmar antes de vaciar el carrito
+        localStorage.removeItem('carrito');  // Eliminar carrito del localStorage
+        mostrarCarrito();  // Actualizar la vista del carrito 
+    } else {
+        alert('Sigue comprando');
+    }
 }
 
 // Función para finalizar la compra (puedes agregar más lógica aquí)
 function finalizarCompra() {
-    alert("Compra finalizada.");
-    localStorage.removeItem('carrito');  // Limpiar el carrito después de la compra
-    mostrarCarrito();  // Actualizar la vista del carrito
+    if (confirm('¿Estás seguro de finalizar la compra?')) {
+        // Confirmar antes de vaciar el carrito
+        localStorage.removeItem('carrito');  // Eliminar carrito del localStorage
+        mostrarCarrito();  // Actualizar la vista del carrito 
+    } else {
+        alert('Compra cancelada');
+    }
 }
+
 
 // Función para cargar todos los productos desde la API
 function cargarTodosLosProductos() {
