@@ -139,7 +139,7 @@ public class Exportar_JSON {
             texto.append(p.getId_categoria());
             texto.append("\n");
         }
-
+        System.out.println("\nCSV CARGADO\n");
         return texto;
     }
     private void removeLastComma(StringBuilder sb) {
