@@ -16,7 +16,7 @@ public class App {
         Clear();
         System.out.println("\nBIENVENIDO ADMIN!!");
         boolean value = false;
-
+//INTERFAZ
         while (!value) {
             System.out.println("\n*************************************************\n");
             System.out.println("\nELIGE UNA OPCIÓN: ");
@@ -42,7 +42,7 @@ public class App {
                     System.out.println("SELECCIONA EL ID DE UNA CATEGORÍA: ");
                     int categoria = Mostrar_Categorias();
                     while (true) {
-                        System.out.println("SELECCIONA EL ORDEN EN EL QUE QUIERES QUE APAREZCAN: 1=disponibilidad, 2=stock ");
+                        System.out.println("SELECCIONA EL ORDEN EN EL QUE QUIERES QUE APAREZCAN: 1=precio, 2=stock ");
                         order = ValidacionEntero();
                         sc.nextLine();
                         if(order==1 || order==2){
@@ -59,7 +59,7 @@ public class App {
                     System.out.println("INGRESA EL TERMINO DE BÚSQUEDA: ");
                     String termino = sc.nextLine();
                     while (true) {
-                        System.out.println("SELECCIONA EL ORDEN EN EL QUE QUIERES QUE APAREZCAN: 1=disponibilidad, 2=stock ");
+                        System.out.println("SELECCIONA EL ORDEN EN EL QUE QUIERES QUE APAREZCAN: 1=precio, 2=stock ");
                         order = ValidacionEntero();
                         sc.nextLine();
                         if(order==1 || order==2){
@@ -99,6 +99,7 @@ public class App {
                     value = SalirSN();
                     break;
                 case 7:
+                // Se va a reescribir porque ya existen, eliminar los json si quieren ver el cambio
                     Option7();
                     value = SalirSN();
                     break;

@@ -29,7 +29,7 @@ public class Gestion_Productos {
     }
 // Metodo principal de listado de productos
     public List<Producto> TraerProductos(boolean order, String filtrar, int categoria )throws Exception{
-        String orderString = "nombre";
+        String orderString = "nombre"; //no se utiliza pero la dejo ahí por si las dudas, asi queda inicializada
         if(order == true){
             orderString = "precio";
         }else{
@@ -40,7 +40,11 @@ public class Gestion_Productos {
         try( Connection connect = conn.conectar() ){
             String query = null;
             ResultSet response = null;
-
+            //La estructura puede llegar a confundir, solo tengo distintos metodos que son el mismo
+            //asi puedo reutilizar el mismo metodo pero hacer que haga consultas con el mismo proposito pero con ciertas diferencias.
+            //ya sea que vengan con un orden distinto, por categoria , por termino de busqueda o incluso todos.
+            //simplemente llamo al mismo metodo pero al pasarle valores distintos en cada llamada él ya que versión de ese metodo es el
+            //que me interesa. polimorfismo le llaman..................................................................................creo.
             if( filtrar==null && categoria!=-1 ){
                 //        Si se le pasa -1 a categoria , pero se le pasa un dato valido a filtro entonces hace el filtrado por busqueda
                 if(order){
@@ -166,6 +170,7 @@ public class Gestion_Productos {
         
     }
 
+    //Producto de menos de 5 en stock
 
     public List<Producto_Stock> ProductosMenosDeCinto()throws Exception{
         try(Connection connect = conn.conectar()){
@@ -188,7 +193,7 @@ public class Gestion_Productos {
         }
         
     }
-
+    // productos sin pedidos
     public List<StringBuilder> Productos_null()throws Exception{
         try(Connection connect = conn.conectar()){
             String query ="SELECT Producto.nombre FROM Producto LEFT JOIN detalle_pedido ON producto.ID_producto = detalle_pedido.ID_producto WHERE detalle_pedido.ID_producto IS NULL";

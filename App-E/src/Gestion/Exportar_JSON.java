@@ -6,30 +6,29 @@ import Entidades.Usuario_Pedidos;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Exportar_JSON {
-    private static final String PRODUCTOS_C_JSON = "productos.JSON";
-    private static final String ESTADISTICAS = "estadisticas.JSON";
-    private static final String PATH = "src/JSON/";
+    private static final String PRODUCTOS_C_JSON = "productos.json"; //Nombre del fichero
+    private static final String ESTADISTICAS = "estadisticas.json"; //Nombre del fichero
+    private static final String PATH = "src/JSON/"; // Path
     public Boolean Export_Product()throws Exception{
-        Gestion_Productos gestionProductos = new Gestion_Productos();
-        List<Producto>Listar_Productos  = gestionProductos.TraerProductos(true);
+        Gestion_Productos gestionProductos = new Gestion_Productos(); // Se instancia de gestion productos
+        List<Producto>Listar_Productos  = gestionProductos.TraerProductos(true);//se crea una lista y se le asigna la lista de productos
 
         File file = new File(PRODUCTOS_C_JSON);
 
         StringBuilder ParseJson = new StringBuilder();
-        if(Listar_Productos.isEmpty()){
+        if(Listar_Productos.isEmpty()){ 
             System.err.println("No se encuentran coincidencias");
         }else {
             // ParseJson =  FormatJSON(Listar_Productos);
             ParseJson = FormatJSON(Listar_Productos);
         }
 
-        try( FileWriter fileWriter = new FileWriter(PATH+PRODUCTOS_C_JSON);){
+        try( FileWriter fileWriter = new FileWriter(PATH+PRODUCTOS_C_JSON);){ // Se escribe el el fichero
 
             fileWriter.write(String.valueOf(ParseJson));
             System.out.println("JSON Exportado");
@@ -42,21 +41,22 @@ public class Exportar_JSON {
 
     //Exportar Estats
     public Boolean Export_Stats()throws Exception{
-        Gestion_Productos g_Productos = new Gestion_Productos();
-        Gestion_Usuarios g_usuarios = new Gestion_Usuarios();
-        Gestion_Pedidos g_Pedidos = new Gestion_Pedidos();
+        Gestion_Productos g_Productos = new Gestion_Productos(); //instacia de gestion de productos
+        Gestion_Usuarios g_usuarios = new Gestion_Usuarios(); // instancia de gestion de usuarios
+        Gestion_Pedidos g_Pedidos = new Gestion_Pedidos(); // instancia de pedidos
 
-        HashMap<StringBuilder, Double> Lista = g_Pedidos.Ganancias_Mas500();
+        //Ignorar el nombre de las variables, ya se me acaban las ideas.
+        HashMap<StringBuilder, Double> Lista = g_Pedidos.Ganancias_Mas500(); // asigna la lista que retorna la funcion Ganancias mayores a 500
 
-        HashMap<String, Double> mesesGanacias = g_Pedidos.Ganancias_Mes();
+        HashMap<String, Double> mesesGanacias = g_Pedidos.Ganancias_Mes();//asigna la lista que retorna la funcion ganancias al mes
         
-        List<StringBuilder>L_productos_null  = g_Productos.Productos_null();
+        List<StringBuilder>L_productos_null  = g_Productos.Productos_null();//asigna la lista que retorna la funcion de productos nunca comprados
        
-        List<Producto_Stock>L_productos_M5 = g_Productos.ProductosMenosDeCinto();
+        List<Producto_Stock>L_productos_M5 = g_Productos.ProductosMenosDeCinto();//asigna la lista de productos con menos de 5 en stock
 
-        double ganancias = g_Pedidos.Ganancias();
+        double ganancias = g_Pedidos.Ganancias(); //ganancias totales
 
-        List<Usuario_Pedidos> usuario_p = g_usuarios.UsuariosConMas_pedidos();
+        List<Usuario_Pedidos> usuario_p = g_usuarios.UsuariosConMas_pedidos(); //usuarios con mas pedidos
         
 
         File file = new File(ESTADISTICAS);
@@ -65,7 +65,7 @@ public class Exportar_JSON {
 
 
         try( FileWriter fileWriter = new FileWriter(PATH+ESTADISTICAS);){
-            ParseJson = FormatJSON_stats(Lista,mesesGanacias,L_productos_null,L_productos_M5,ganancias,usuario_p);
+            ParseJson = FormatJSON_stats(Lista,mesesGanacias,L_productos_null,L_productos_M5,ganancias,usuario_p); //llama al metodo que va a escribir
             fileWriter.write(String.valueOf(ParseJson));
             System.out.println("JSON Exportado");
             return true;
@@ -76,8 +76,8 @@ public class Exportar_JSON {
         
     }
    
-   
-    public StringBuilder FormatJSON(List<Producto> Listar_Productos){
+   // Se arma poco a poco
+    public StringBuilder FormatJSON(List<Producto> Listar_Productos){ //metodo que escribe el json productos
         StringBuilder ParseJson = new StringBuilder("[");
         for(Producto producto : Listar_Productos){
 //                        ID
@@ -119,6 +119,10 @@ public class Exportar_JSON {
 
         return ParseJson;
     }
+
+
+
+    ////!!!!!!!!!!!!! aqui leo el CSV
     public StringBuilder CSV(List<Producto> L){
         StringBuilder texto = new StringBuilder();
         
@@ -149,7 +153,8 @@ public class Exportar_JSON {
         }
     }
     
-
+    //json de estadisticas
+    //quedó un poco larguito, esque son muchas funcionalidades
     public StringBuilder FormatJSON_stats(HashMap<StringBuilder, Double> Lista, HashMap<String, Double> mesesGanacias, List<StringBuilder> L_productos_null, List<Producto_Stock> L_productos_M5, double ganancias, List<Usuario_Pedidos> usuario_p) {
         StringBuilder ParseJson = new StringBuilder("{\n"); // Inicio del JSON
     

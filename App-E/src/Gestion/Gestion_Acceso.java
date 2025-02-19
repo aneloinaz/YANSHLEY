@@ -10,12 +10,12 @@ import java.sql.ResultSet;
 public class Gestion_Acceso{
 
     public boolean Sesion(String email, String password)throws Exception{
-        try(  Connection connect = new ConexionBD().conectar(); ){
-            String query = "SELECT pass FROM usuario WHERE correo_electronico = ?";
+        try(  Connection connect = new ConexionBD().conectar(); ){ // Se hace la conexion
+            String query = "SELECT pass FROM usuario WHERE correo_electronico = ?";//se crea la consulta
             CallableStatement cs = connect.prepareCall(query);
-            cs.setString(1,email);
-            ResultSet response = cs.executeQuery();
-            if(response.next()){
+            cs.setString(1,email);//se asigna el ?
+            ResultSet response = cs.executeQuery();// se ejecuta la query
+            if(response.next()){// recorre la respuesta
                 String pass = response.getString(1);
                 if(!pass.equals(password)){
                     System.err.println("Contraseña invalida");
@@ -35,6 +35,13 @@ public class Gestion_Acceso{
     }
 
 
+
+
+
+
+
+
+    // funcion no habilitada, solo es para hacer pruebas, pero miren que bonita!
     public Boolean registro(Usuario usuario) throws Exception{
 
         try( Connection connect = new ConexionBD().conectar();){

@@ -55,7 +55,7 @@ public class GestionProductosTest {
     @Test
 public void AgregarProductos_Test() throws Exception {
     Gestion_Productos gestion = new Gestion_Productos();
-    Producto producto = new Producto(22, "Nombre falso", "Descripcion falsa", 99.99, 22, "http://HolaMundo.com", 4);
+    Producto producto = new Producto(23, "Nombre falso", "Descripcion falsa", 99.99, 22, "http://HolaMundo.com", 4);
     gestion.AgregarProducto(producto);
 
     // Retorno de la base de datos
@@ -63,7 +63,7 @@ public void AgregarProductos_Test() throws Exception {
     try (Connection connect = conn.conectar()) {
         String query = "SELECT id_producto, nombre, descripcion, precio, stock, imagen, id_categoria FROM producto WHERE id_producto = ?";
         CallableStatement cs = connect.prepareCall(query);
-        cs.setInt(1, 22);
+        cs.setInt(1, 23);
         ResultSet response = cs.executeQuery();
 
         if (response.next()) { // Mover el cursor a la primera fila
@@ -103,6 +103,9 @@ public void ModificarProducto_Test() throws Exception {
     Gestion_Productos gestion = new Gestion_Productos();
     
     // Se ejecuta la modificación y se verifica que devuelva true
+    //************************************************************** */
+    // CAMBIAR EL ID SI QUIEREN MODIFICAR
+    //************************************************************** */
     Assert.assertTrue("La modificación del producto falló", gestion.ModificarProducto(producto, 12));
 
     // Conexión a la base de datos para verificar los cambios
@@ -110,6 +113,9 @@ public void ModificarProducto_Test() throws Exception {
     try (Connection connect = conn.conectar()) {
         String query = "SELECT nombre, precio FROM producto WHERE id_producto = ?";
         CallableStatement cs = connect.prepareCall(query);
+        //************************************************************** */
+        //AQUI TAMBIEN SE CAMBIA
+        //************************************************************** */
         cs.setInt(1, 12);
         ResultSet response = cs.executeQuery();
 
@@ -134,8 +140,9 @@ public void EliminarProducto_Test() throws Exception {
     // Instancia de la gestión de productos
     Gestion_Productos gestion = new Gestion_Productos();
 
-    // Elimina el producto con id 25
-    Assert.assertTrue("La eliminación del producto falló", gestion.EliminarProducto(26));
+    // Elimina el producto con id 
+    //!!!!!!!!!!!!!!!!!!!!!SI VAN A ELIMINAR CAMBIEN EL ID!!!!!!!!!!!!!!!!!!!!!!!11
+    Assert.assertTrue("La eliminación del producto falló", gestion.EliminarProducto(26)); 
 
     // Conexión a la base de datos para verificar si el producto fue eliminado
     ConexionBD conn = new ConexionBD();
