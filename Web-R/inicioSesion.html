@@ -6,51 +6,7 @@
     <title>Iniciar sesión</title>
     <link rel="stylesheet" href="css.css">
     <link rel="stylesheet" href="usuario.css">
-   <style> /*
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-        .InicioSesion {
-            max-width: 400px;
-            margin: 100px auto;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        h2 {
-            text-align: center;
-        }
-        input[type="email"], input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        .message {
-            text-align: center;
-            margin-top: 10px;
-            color: #555;
-        }
-    */</style>
+
 </head>
 <body>
     <header>
@@ -58,21 +14,41 @@
         <img src="../Web-R/Icons/textile_svgrepo.com.png" alt="logo">
         <nav>
             <ul>
-                <li class="active"><a href="index.html">Inicio</a></li>
+                <li class="active">
+                    <a href="index.html">
+                        <img src="../Web-R/Icons/shop_svgrepo.com.png" alt="Inicio">
+                        <span>Inicio</span>
+                    </a>
+                </li>
+                <li>
                 <div class="desplegable">
-                    <li class=""><a href="productos.html">Productos</a></li>
-                    <ul class="contenido-desplegable">
-                        <li><a href="#" onclick="filterProducts('zapatos')">ZAPATOS</a></li>
-                        <li><a href="#" onclick="filterProducts('pantalones')">PANTALONES</a></li>
-                        <li><a href="#" onclick="filterProducts('camisetas')">CAMISETAS</a></li>
-                        <li><a href="#" onclick="filterProducts('sudaderas')">SUDADERAS</a></li>
-                        <li><a href="#" onclick="filterProducts('camisas')">CAMISAS</a></li>
-                        <li><a href="#" onclick="filterProducts('chaquetas')">CHAQUETAS</a></li>
-                    </ul>
+                    
+                        <a href="productos.html">
+                            <img src="../Web-R/Icons/search-alt-2_svgrepo.com.png" alt="Productos">
+                            <span>Productos</span>
+                        </a>
                 </div>
-                <li><a href="cesta.html">Carrito</a></li>
-                <li><a href="PerfilUsuario.html">Usuario</a></li>
-            </ul>
+                <script src="productos.js"></script>
+              
+            </li>
+                <li>
+                    <a href="cesta.html">
+                        <img src="../Web-R/Icons/shopping-bag_svgrepo.com.png" alt="Carrito">
+                        <span>Carrito</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="inicioSesion.html">
+                        <img src="../Web-R/Icons/user_svgrepo.com.png" alt="Usuario">
+                        <span>Usuario</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="estadistica.html">
+                        <img src="../Web-R/Icons/Group 8.png" alt="estadistica">
+                        <span>Estadísticas</span>
+                    </a>
+                </li>
         </nav>
     </header>
     <div class="InicioSesion">
@@ -87,7 +63,7 @@
             <button type="submit">Iniciar sesión</button>
         </form>
         <div class="message">
-            <p>¿No tienes cuenta? <a href="/registro">Regístrate aquí</a></p>
+            <p>¿No tienes cuenta? <a href="PerfilUsuario.html">Regístrate aquí</a></p>
         </div>
     </div>
     <footer class="footer">
